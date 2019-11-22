@@ -1,0 +1,48 @@
+
+Function to duplicate element document.getElementById(uID + "_refresh").childNodes[0]
+
+&#9658 - Play
+|| - Pause
+
+Remove class - refresh
+width: 22px;
+height: 20px;
+vertical-align: bottom;
+background: #32cc32; (Play) | #dbcfcf; (Pause)
+color: white;
+
+
+
+Div containing toggle button and last update text - If it's AFTER the DIV containing the refresh button this will fix the issues with it sometimes vanishing - Also we do not append the content, we simply write over it.
+line-height: 26px;
+font-style: italic;
+position: absolute;
+display: inline-block;
+
+
+<div id="lastUpdate" style="line-height: 25px; font-style: italic;position: absolute;display: inline-block;" >
+	<input type="button" href="javascript:void(0)" onclick="javascript:console.log('Start');" style="position: relative;top: 2px;float: left;margin-right: 6px;width: 22px;height: 20px;background: #32cc32;color:white;font-weight:bold;" class="btn" value="►" title="Auto Refresh: On">
+	Last Updated: 11:53:20
+</div>
+
+
+Without using jQuery, only vanilla JavaScript:
+
+var inactivityTime = function () {
+    var time;
+    window.onload = resetTimer;
+    // DOM Events
+    document.onmousemove = resetTimer;
+    document.onkeypress = resetTimer;
+
+    function logout() {
+        alert("You are now logged out.")
+        //location.href = 'logout.html'
+    }
+
+    function resetTimer() {
+        clearTimeout(time);
+        time = setTimeout(logout, 3000)
+        // 1000 milliseconds = 1 second
+    }
+};
