@@ -8,7 +8,7 @@ if (typeof sfQueue === 'undefined' || sfQueue === null) {
 	var sfQueue = true;
 	var uID = window.location.search.split('=')[1];
 	// Small inline check which removes any parameters picked up after the unique ID (Can occur with pagination, etc).
-	if( uID.indexOf("?") != -1) { uID.slice(0,uID.indexOf("?");};
+	if( uID.indexOf("&") != -1) { uID.slice(0,uID.indexOf("&");};
 	var refresh = prompt("Enter refresh interval (Seconds)", 30);
 	// Set refresh from seconds to milliseconds ( * 1000)
 	refresh = refresh * 1000;
