@@ -50,9 +50,31 @@ function createUpdateItem() {
 
 }
 
-// Simple function to log the user out (Used in conjunction with inactivity timer).
-function logout() {
-	window.location.replace("https://eu12.salesforce.com/secur/logout.jsp?product=www.salesforce.com");
+// Inactivity timer used to log the user out after a defined period of inactivity (default 4 hours).
+var inactivityTime = function (x) {
+    
+	var activeTime;
+    window.onload = resetTimer;
+	var setInactiveTimeout = hours(x);
+	
+	
+    // DOM Events
+    document.onmousemove = resetTimer;
+    document.onkeypress = resetTimer;
+
+	function hours(ms){
+		var hours = ((ms * 1000) * 60) * 60;
+		return hours;
+	}
+
+	function logout() {
+		window.location.replace("https://eu12.salesforce.com/secur/logout.jsp?product=www.salesforce.com");
+	}
+
+    function resetTimer() {
+        clearTimeout(activeTime);
+        activeTime = setTimeout(logout, setInactiveTimeout)
+    }
 }
 
 // Stop & Start the auto refresh script.
@@ -70,6 +92,8 @@ function toggleStatus(){ //NEED TO STYLE BETWEEN ON AND OFF IN HERE & CHANGE PLA
 
 // Checks to make sure the script isn't already running in this tab, before allowing you to run again.
 if (typeof sfQueue === 'undefined' || sfQueue === null) {
+	
+	// Mark the script as currently running.
 	var sfQueue = true;
 	
 	// Grab the uID of the current view from the URL string.
@@ -88,6 +112,9 @@ if (typeof sfQueue === 'undefined' || sfQueue === null) {
 	
 	// Build the elements on the page (Stop/Start button & last updated text).
 	createUpdateItem();
+	
+	// Activate the inactivity timer with a timeout set to 4 hours.
+	inactivityTime(4);
 	
 	// Start the loop to refresh the screen.
 	var timer = true;

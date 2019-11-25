@@ -1,48 +1,74 @@
+Final bits for toggleStatus Function:
 
-Function to duplicate element document.getElementById(uID + "_refresh").childNodes[0]
-
-&#9658 - Play
-|| - Pause
-
-Remove class - refresh
-width: 22px;
-height: 20px;
-vertical-align: bottom;
+&#9658 - Play	|| - Pause
 background: #32cc32; (Play) | #dbcfcf; (Pause)
-color: white;
+Auto Refresh: On/Off - Title
+
+Desktop Notification on new case (PoC):
+
+// Grab Original case count.
+var currentCaseCount = document.getElementById("ext-gen12").childElementCount;
+
+if (document.getElementById("ext-gen12").childElementCount <> currentCaseCount) {
+	// Case number has changed. Push Desktop Notification
+}
 
 
+TODO:
 
-Div containing toggle button and last update text - If it's AFTER the DIV containing the refresh button this will fix the issues with it sometimes vanishing - Also we do not append the content, we simply write over it.
-line-height: 26px;
-font-style: italic;
-position: absolute;
-display: inline-block;
+	IMPORTANT:
 
+	toggleStatus function needs to change between play and pause value, along with background color.
+	Proper version control as opposed to random commits being thrown in.
+	
+	
+	OTHER:
+	
+	Move all style related items to an external CSS file which is loaded by our main script.
+	Add small div which pops up and disappears when you toggle the auto refresh on and off.
+	Desktop Notification when a new case is added to the queue - work on above code as it will currently still notifiy the user when a case is removed from the queue...
+	Options menu to set interval, idle timeout & notification settings.
+	
+	RESOURCES:
+	
+	https://stackoverflow.com/questions/23244338/pure-javascript-fade-in-function
+	https://stackoverflow.com/questions/574944/how-to-load-up-css-files-using-javascript
+	http://youmightnotneedjquery.com/
+	
+	
+	
+HTML:
+<div id="div1">ABCDEFG</div>
 
-<div id="lastUpdate" style="line-height: 25px; font-style: italic;position: absolute;display: inline-block;" >
-	<input type="button" href="javascript:void(0)" onclick="javascript:console.log('Start');" style="position: relative;top: 2px;float: left;margin-right: 6px;width: 22px;height: 20px;background: #32cc32;color:white;font-weight:bold;" class="btn" value="►" title="Auto Refresh: On">
-	Last Updated: 11:53:20
-</div>
+CSS:
 
+#div1 {
+  background: rgba(0, 0, 255, 0.6);
+  color: white;
+  padding: 5px;
+  border-radius: 18px;
+  width: 100px;
+  text-align: center;
+}
 
-Without using jQuery, only vanilla JavaScript:
+JS:
 
-var inactivityTime = function () {
-    var time;
-    window.onload = resetTimer;
-    // DOM Events
-    document.onmousemove = resetTimer;
-    document.onkeypress = resetTimer;
+var el = document.getElementById("div1");
 
-    function logout() {
-        alert("You are now logged out.")
-        //location.href = 'logout.html'
+function fadeIn(el, time) {
+  el.style.opacity = 0;
+
+  var last = +new Date();
+  var tick = function() {
+    el.style.opacity = +el.style.opacity + (new Date() - last) / time;
+    last = +new Date();
+
+    if (+el.style.opacity < 1) {
+      (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
     }
+  };
 
-    function resetTimer() {
-        clearTimeout(time);
-        time = setTimeout(logout, 3000)
-        // 1000 milliseconds = 1 second
-    }
-};
+  tick();
+}
+
+fadeIn(el, 2000);
