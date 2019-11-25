@@ -35,6 +35,7 @@ TODO:
 	Add small div which pops up and disappears when you toggle the auto refresh on and off.
 	Desktop Notification when a new case is added to the queue - work on above code as it will currently still notifiy the user when a case is removed from the queue...
 	Options menu to set interval, idle timeout & notification settings.
+	Open new cases in a new tab (option to set alias and only do this for your alias? Or only status new? or both!?)
 	
 	RESOURCES:
 	
