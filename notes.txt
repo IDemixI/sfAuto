@@ -13,6 +13,13 @@ if (document.getElementById("ext-gen12").childElementCount <> currentCaseCount) 
 	// Case number has changed. Push Desktop Notification
 }
 
+Possibly store cases in an array and check against the array to see changes, as opposed to number of cases. This will eliminate the issue of creating a notification when
+a case is removed from the queue. Maybe still keep the count as part of the notifcation?
+
+"Salesforce Support Queue"
+"A new case/response has been received - "case number - description"
+"Total Cases in queue: 123"
+
 
 TODO:
 
