@@ -1,9 +1,3 @@
-Final bits for toggleStatus Function:
-
-&#9658 - Play	|| - Pause
-background: #32cc32; (Play) | #dbcfcf; (Pause)
-Auto Refresh: On/Off - Title
-
 Desktop Notification on new case (PoC):
 
 // Grab Original case count.
@@ -25,14 +19,13 @@ TODO:
 
 	IMPORTANT:
 
-	toggleStatus function needs to change between play and pause value, along with background color.
 	Proper version control as opposed to random commits being thrown in.
 	
 	
 	OTHER:
 	
-	Move all style related items to an external CSS file which is loaded by our main script.
 	Add small div which pops up and disappears when you toggle the auto refresh on and off.
+	Move all style related items to an external CSS file which is loaded by our main script.
 	Desktop Notification when a new case is added to the queue - work on above code as it will currently still notifiy the user when a case is removed from the queue...
 	Options menu to set interval, idle timeout & notification settings.
 	Open new cases in a new tab (option to set alias and only do this for your alias? Or only status new? or both!?)
@@ -43,6 +36,7 @@ TODO:
 	https://stackoverflow.com/questions/23244338/pure-javascript-fade-in-function
 	https://stackoverflow.com/questions/574944/how-to-load-up-css-files-using-javascript
 	http://youmightnotneedjquery.com/
+	https://attacomsian.com/blog/desktop-notifications-javascript
 	
 	
 	

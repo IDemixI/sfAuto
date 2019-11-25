@@ -35,8 +35,9 @@ function createUpdateItem() {
 		node.style.display = "inline-block";
 		node.id = "lastUpdate";
 		
+		arButton.id = "toggleRefresh";
 		arButton.class = "";
-		arButton.setAttribute("style", "position: relative; top: 2px; float: left; margin-right: 6px; width: 22px; height: 20px; background: #dbcfcf; color:white; font-weight:bold;");
+		arButton.setAttribute("style", "position: relative; top: 2px; float: left; margin-right: 6px; width: 22px; height: 20px; background: rgb(240, 240, 244); color:black; font-weight:bold;");
 		arButton.value = "||";
 		arButton.title = "Auto Refresh: On";
 		arButton.onclick = ( function() { toggleStatus() });
@@ -78,16 +79,59 @@ var inactivityTime = function (x) {
 }
 
 // Stop & Start the auto refresh script.
-function toggleStatus(){ //NEED TO STYLE BETWEEN ON AND OFF IN HERE & CHANGE PLAY TO PAUSE, ETC!!!
+function toggleStatus(){
 	if (timer) {
 		timer = false;
 		clearInterval(loop);
 		console.log("Automatic Refresh has been paused");
+		// Play button etc
+		toggleRefresh = document.getElementById("toggleRefresh");
+		toggleRefresh.style.background = "#32cc32";
+		toggleRefresh.style.color = "white";
+		toggleRefresh.value = "►";
+		toggleRefresh.title = "Auto Refresh: Off";
 	} else {
 		timer = true;
 		loop = setInterval(sfUpdate, refresh);
 		console.log("Automatic Refresh has been started");
+		// Pause button etc
+		toggleRefresh = document.getElementById("toggleRefresh");
+		toggleRefresh.style.background = "rgb(240, 240, 244)";
+		toggleRefresh.style.color = "black";
+		toggleRefresh.value = "||";
+		toggleRefresh.title = "Auto Refresh: On";
 	}
+}
+
+// Notification function
+function notifyMe() {
+    if (!window.Notification) {
+        console.log('Browser does not support notifications.');
+    } else {
+        // check if permission is already granted
+        if (Notification.permission === 'granted') {
+            // show notification here
+            var notify = new Notification('Hi there!', {
+                body: 'How are you doing?',
+                icon: 'https://image.shutterstock.com/image-vector/notification-icon-vector-material-design-260nw-759841507.jpg',
+            });
+        } else {
+            // request permission from user
+            Notification.requestPermission().then(function (p) {
+                if (p === 'granted') {
+                    // show notification here
+                    var notify = new Notification('Hi there!', {
+                        body: 'How are you doing?',
+                        icon: 'https://image.shutterstock.com/image-vector/notification-icon-vector-material-design-260nw-759841507.jpg',
+                    });
+                } else {
+                    console.log('User blocked notifications.');
+                }
+            }).catch(function (err) {
+                console.error(err);
+            });
+        }
+    }
 }
 
 // Checks to make sure the script isn't already running in this tab, before allowing you to run again.
