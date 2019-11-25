@@ -36,6 +36,7 @@ TODO:
 	Desktop Notification when a new case is added to the queue - work on above code as it will currently still notifiy the user when a case is removed from the queue...
 	Options menu to set interval, idle timeout & notification settings.
 	Open new cases in a new tab (option to set alias and only do this for your alias? Or only status new? or both!?)
+	Ability to "highlight" cases of specific type like previous todo. Choose colour, etc?
 	
 	RESOURCES:
 	
