@@ -22,27 +22,22 @@ function createUpdateItem() {
 	var today = new Date();
 	var time = today.getHours().pad(2) + ":" + today.getMinutes().pad(2) + ":" + today.getSeconds().pad(2);
 	
-	// If lastUpdate doesn't exist, create and populate it.
+	// If lastUpdate div and its contents doesn't exist, create and populate them.
 	if (document.getElementById("lastUpdate") == null){
-		var node = document.createElement("DIV");
-		var spantext = document.createElement("SPAN");
+		var node = document.createElement("div");
+		var spantext = document.createElement("span");
 		var arButton = document.getElementById(uID + "_refresh").cloneNode();
 		
-		node.appendChild(spantext);
-		node.style.lineHeight = "25px";
-		node.style.fontStyle = "italic";
-		node.style.position = "absolute";
-		node.style.display = "inline-block";
 		node.id = "lastUpdate";
-		
 		arButton.id = "toggleRefresh";
-		arButton.class = "";
-		arButton.setAttribute("style", "position: relative; top: 2px; float: left; margin-right: 6px; width: 22px; height: 20px; background: rgb(240, 240, 244); color:black; font-weight:bold;");
-		arButton.value = "||";
+		arButton.classList.add("toggle");
+		arButton.classList.add("toggle on");
 		arButton.title = "Auto Refresh: On";
 		arButton.onclick = ( function() { toggleStatus() });
 		
+		node.appendChild(spantext);
 		node.appendChild(arButton);
+		
 		insertAfter(document.getElementById(uID + "_listButtons"), node);
 	}
 	
@@ -138,8 +133,8 @@ function notifyMe() {
 if (typeof sfQueue === 'undefined' || sfQueue === null) {
 	
 	// Import sfAuto Style Sheet
-	var cssURL = "";
-	var fileref = document.createElement("style");
+	var cssURL = "https://cdn.jsdelivr.net/gh/IDemixI/sfAutoRefresh@master/style.css";
+	var fileref = document.createElement("link");
     fileref.setAttribute("rel", "stylesheet");
     fileref.setAttribute("type", "text/css");
     fileref.setAttribute("href", cssURL);
