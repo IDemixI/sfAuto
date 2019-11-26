@@ -30,8 +30,8 @@ function createUpdateItem() {
 		
 		node.id = "lastUpdate";
 		arButton.id = "toggleRefresh";
-		arButton.classList.add("toggle");
-		arButton.classList.add("toggle on");
+		arButton.className = "btn toggle on";
+		arButton.value = "||";
 		arButton.title = "Auto Refresh: On";
 		arButton.onclick = ( function() { toggleStatus() });
 		
@@ -81,8 +81,8 @@ function toggleStatus(){
 		console.log("Automatic Refresh has been paused");
 		// Play button etc
 		toggleRefresh = document.getElementById("toggleRefresh");
-		toggleRefresh.style.background = "#32cc32";
-		toggleRefresh.style.color = "white";
+		toggleRefresh.classList.remove("on");
+		toggleRefresh.classList.add("off");
 		toggleRefresh.value = "►";
 		toggleRefresh.title = "Auto Refresh: Off";
 	} else {
@@ -91,8 +91,8 @@ function toggleStatus(){
 		console.log("Automatic Refresh has been started");
 		// Pause button etc
 		toggleRefresh = document.getElementById("toggleRefresh");
-		toggleRefresh.style.background = "rgb(240, 240, 244)";
-		toggleRefresh.style.color = "black";
+		toggleRefresh.classList.remove("off");
+		toggleRefresh.classList.add("on");
 		toggleRefresh.value = "||";
 		toggleRefresh.title = "Auto Refresh: On";
 	}
@@ -133,7 +133,8 @@ function notifyMe() {
 if (typeof sfQueue === 'undefined' || sfQueue === null) {
 	
 	// Import sfAuto Style Sheet
-	var cssURL = "https://cdn.jsdelivr.net/gh/IDemixI/sfAutoRefresh@master/style.css";
+	//var cssURL = "https://cdn.jsdelivr.net/gh/IDemixI/sfAutoRefresh@master/style.css";
+	var cssURL = "https://cdn.jsdelivr.net/gh/IDemixI/sfAutoRefresh/style.css";
 	var fileref = document.createElement("link");
     fileref.setAttribute("rel", "stylesheet");
     fileref.setAttribute("type", "text/css");
