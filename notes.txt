@@ -14,6 +14,9 @@ a case is removed from the queue. Maybe still keep the count as part of the noti
 "A new case/response has been received - "case number - description"
 "Total Cases in queue: 123"
 
+document.getElementById("globalHeaderNameMink").children[1].textContent - Grab Username
+I can use this if I go down the store user settings to JSON route - Can check the JSON for an entry with this name and write or update depending on what comes back. This means all "settings" including refresh rate can be stored (no need to enter it each time a user loads the page)
+
 
 TODO:
 
@@ -26,13 +29,11 @@ TODO:
 	
 	Open new cases in a new tab (option to set alias and only do this for your alias? Or only status new? or both!?)
 	Ability to "highlight" cases of specific type like previous todo. Choose colour, etc?
+	Move settings stuff to external JSON - PoC
 	
 	RESOURCES:
 	
-	https://stackoverflow.com/questions/23244338/pure-javascript-fade-in-function
-	https://stackoverflow.com/questions/574944/how-to-load-up-css-files-using-javascript
 	http://youmightnotneedjquery.com/
-	https://attacomsian.com/blog/desktop-notifications-javascript
 	
 	
 	
