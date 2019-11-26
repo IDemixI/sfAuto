@@ -3,7 +3,7 @@ Desktop Notification on new case (PoC):
 // Grab Original case count.
 var currentCaseCount = document.getElementById("ext-gen12").childElementCount;
 
-if (document.getElementById("ext-gen12").childElementCount <> currentCaseCount) {
+if (document.getElementById("ext-gen12").childElementCount > currentCaseCount) {
 	// Case number has changed. Push Desktop Notification
 }
 
@@ -13,6 +13,8 @@ a case is removed from the queue. Maybe still keep the count as part of the noti
 "Salesforce Support Queue"
 "A new case/response has been received - "case number - description"
 "Total Cases in queue: 123"
+
+notifyMe('Case', '00012345', 'FME License Issue', 3)
 
 document.getElementById("globalHeaderNameMink").children[1].textContent - Grab Username
 I can use this if I go down the store user settings to JSON route - Can check the JSON for an entry with this name and write or update depending on what comes back. This means all "settings" including refresh rate can be stored (no need to enter it each time a user loads the page)

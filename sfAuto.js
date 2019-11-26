@@ -137,7 +137,7 @@ function toggleStatus(){
 }
 
 // Notification function
-function notifyMe() {
+function notifyMe(type, caseNum, desc, totalCases) {
     if (!window.Notification) {
         console.log('Browser does not support notifications.');
     } else {
@@ -145,8 +145,8 @@ function notifyMe() {
         if (Notification.permission === 'granted') {
             // show notification here
             var notify = new Notification('Salesforce Support Queue Notification', {
-                body: 'How are you doing? \nTEST LINE 2',
-                icon: 'https://icon-library.net/images/sales-force-icon/sales-force-icon-1.jpg',
+				body: 'A New ' + type + ' has been received.' + '\n' + 'Case: ' + caseNum + ' - ' + desc + '\n\n' + 'Total Cases in Queue: ' + totalCases ,
+                icon: 'https://130e178e8f8ba617604b-8aedd782b7d22cfe0d1146da69a52436.ssl.cf1.rackcdn.com/salesforce-security-alert-api-error-exposed-marketing-data-showcase_image-6-a-11278.jpg',
             });
         } else {
             // request permission from user
@@ -154,8 +154,8 @@ function notifyMe() {
                 if (p === 'granted') {
                     // show notification here
                     var notify = new Notification('Salesforce Support Queue Notification', {
-                        body: 'How are you doing? \nTEST LINE 2',
-                        icon: 'https://icon-library.net/images/sales-force-icon/sales-force-icon-1.jpg',
+                        body: 'A New ' + type + ' has been received.' + '\n' + 'Case: ' + caseNum + ' - ' + desc + '\n\n' + 'Total Cases in Queue: ' + totalCases ,
+                        icon: 'https://130e178e8f8ba617604b-8aedd782b7d22cfe0d1146da69a52436.ssl.cf1.rackcdn.com/salesforce-security-alert-api-error-exposed-marketing-data-showcase_image-6-a-11278.jpg',
                     });
                 } else {
                     console.log('User blocked notifications.');
