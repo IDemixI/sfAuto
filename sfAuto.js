@@ -1,3 +1,41 @@
+// Load all external resources.
+function loadResources(){
+	
+	// Import Style Sheet
+	var script = document.createElement('script');
+	script.type = 'text/javascript';
+	script.src = 'https://cdn.jsdelivr.net/gh/IDemixI/sfAutoRefresh@master/notifications.js';
+	document.getElementsByTagName('head')[0].appendChild(script);
+	
+	// Import sfAuto Style Sheet
+	var cssURL = "https://cdn.jsdelivr.net/gh/IDemixI/sfAutoRefresh@master/style.css";
+	var fileref = document.createElement("link");
+    fileref.setAttribute("rel", "stylesheet");
+    fileref.setAttribute("type", "text/css");
+    fileref.setAttribute("href", cssURL);
+	document.getElementsByTagName("head")[0].appendChild(fileref)
+	
+};
+
+function setNotification(message) {
+	
+	const myNotification = window.createNotification({
+		closeOnClick: true, // close on click
+		displayCloseButton: false, // displays close button
+		positionClass: 'nfc-top-right', // nfc-top-left | nfc-top-right | nfc-bottom-left | nfc-bottom-right
+		onclick: false, // callback
+		showDuration: 2500, // timeout in milliseconds
+		theme: 'info' // success, info, warning, error, and none
+	});
+	
+	if (message !== undefined || typeof message !== 'undefined') {
+		myNotification({
+			title: 'Notification',
+			message: message
+		});
+	}
+}
+
 // Prototype to pad time (if < 10 seconds pads with a 0)
 Number.prototype.pad = function (len) {
 	return (new Array(len+1).join("0") + this).slice(-len);
@@ -78,7 +116,7 @@ function toggleStatus(){
 	if (timer) {
 		timer = false;
 		clearInterval(loop);
-		console.log("Automatic Refresh has been paused");
+		setNotification('Automatic Refresh has been paused');
 		// Play button etc
 		toggleRefresh = document.getElementById("toggleRefresh");
 		toggleRefresh.classList.remove("on");
@@ -88,7 +126,7 @@ function toggleStatus(){
 	} else {
 		timer = true;
 		loop = setInterval(sfUpdate, refresh);
-		console.log("Automatic Refresh has been started");
+		setNotification('Automatic Refresh has been started');
 		// Pause button etc
 		toggleRefresh = document.getElementById("toggleRefresh");
 		toggleRefresh.classList.remove("off");
@@ -132,13 +170,8 @@ function notifyMe() {
 // Checks to make sure the script isn't already running in this tab, before allowing you to run again.
 if (typeof sfQueue === 'undefined' || sfQueue === null) {
 	
-	// Import sfAuto Style Sheet
-	var cssURL = "https://cdn.jsdelivr.net/gh/IDemixI/sfAutoRefresh@latest/style.css";
-	var fileref = document.createElement("link");
-    fileref.setAttribute("rel", "stylesheet");
-    fileref.setAttribute("type", "text/css");
-    fileref.setAttribute("href", cssURL);
-	document.getElementsByTagName("head")[0].appendChild(fileref)
+	// Import external resources
+	loadResources()
 	
 	// Mark the script as currently running.
 	var sfQueue = true;
@@ -166,6 +199,9 @@ if (typeof sfQueue === 'undefined' || sfQueue === null) {
 	// Start the loop to refresh the screen.
 	var timer = true;
 	var loop = setInterval(sfUpdate, refresh);
+	
+	// Initialise notifications
+	setTimeout(setNotification, 500);
 	
 } else {
 	console.log("Script is already running. Refresh the page to activate script again");
