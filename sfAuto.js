@@ -106,18 +106,18 @@ function notifyMe() {
         // check if permission is already granted
         if (Notification.permission === 'granted') {
             // show notification here
-            var notify = new Notification('Hi there!', {
-                body: 'How are you doing?',
-                icon: 'https://image.shutterstock.com/image-vector/notification-icon-vector-material-design-260nw-759841507.jpg',
+            var notify = new Notification('Salesforce Support Queue Notification', {
+                body: 'How are you doing? \nTEST LINE 2',
+                icon: 'https://icon-library.net/images/sales-force-icon/sales-force-icon-1.jpg',
             });
         } else {
             // request permission from user
             Notification.requestPermission().then(function (p) {
                 if (p === 'granted') {
                     // show notification here
-                    var notify = new Notification('Hi there!', {
-                        body: 'How are you doing?',
-                        icon: 'https://image.shutterstock.com/image-vector/notification-icon-vector-material-design-260nw-759841507.jpg',
+                    var notify = new Notification('Salesforce Support Queue Notification', {
+                        body: 'How are you doing? \nTEST LINE 2',
+                        icon: 'https://icon-library.net/images/sales-force-icon/sales-force-icon-1.jpg',
                     });
                 } else {
                     console.log('User blocked notifications.');
@@ -133,8 +133,7 @@ function notifyMe() {
 if (typeof sfQueue === 'undefined' || sfQueue === null) {
 	
 	// Import sfAuto Style Sheet
-	//var cssURL = "https://cdn.jsdelivr.net/gh/IDemixI/sfAutoRefresh@master/style.css";
-	var cssURL = "https://cdn.jsdelivr.net/gh/IDemixI/sfAutoRefresh/style.css";
+	var cssURL = "https://cdn.jsdelivr.net/gh/IDemixI/sfAutoRefresh@latest/style.css";
 	var fileref = document.createElement("link");
     fileref.setAttribute("rel", "stylesheet");
     fileref.setAttribute("type", "text/css");
