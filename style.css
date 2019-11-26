@@ -1,0 +1,68 @@
+.lastUpdate {
+	line-height: 25px;
+	font-style: italic;
+	position: absolute;
+	display: inline-block;
+}
+
+.toggleRefresh {
+	position: relative;
+	top: 2px; 
+	float: left; 
+	margin-right: 6px; 
+	width: 22px; 
+	height: 20px;
+	font-weight: bold;
+}
+
+.toggleRefresh on {
+	background: rgb(240, 240, 244); 
+	color: black; 
+	content: "||";
+}
+
+.toggleRefresh off {
+	background: #32cc32; 
+	color: white; 
+	content: "►";
+}
+
+.notice {
+	position: fixed;
+	bottom: 5px;
+	right: 5px;
+	background: rgb(0, 120, 200);
+	border: solid black thin;
+	border-radius: 12px;
+	padding: 8px;
+	color: white;
+	width: 40%;
+	opacity: 1;
+	animation: fadeinout 4s linear 1 forwards;
+}
+
+.notice2 {
+	position: fixed;
+	bottom: 5px;
+	right: 5px;
+	background: rgb(0, 120, 200);
+	border: solid black thin;
+	border-radius: 12px;
+	padding: 8px;
+	color: white;
+	width: 40%;
+	opacity: 1;
+	animation: fadeinout 4s linear 1 forwards;
+}
+
+@-webkit-keyframes fadeinout {
+	0% {opacity: 0; }
+	50% {opacity: 1; }
+	100% {opacity: 0; }
+}
+
+@keyframes fadeinout {
+	0% {opacity: 0; }
+	50% {opacity: 1; }
+	100% {opacity: 0; }
+}

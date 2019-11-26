@@ -137,6 +137,14 @@ function notifyMe() {
 // Checks to make sure the script isn't already running in this tab, before allowing you to run again.
 if (typeof sfQueue === 'undefined' || sfQueue === null) {
 	
+	// Import sfAuto Style Sheet
+	var cssURL = "";
+	var fileref = document.createElement("style");
+    fileref.setAttribute("rel", "stylesheet");
+    fileref.setAttribute("type", "text/css");
+    fileref.setAttribute("href", cssURL);
+	document.getElementsByTagName("head")[0].appendChild(fileref)
+	
 	// Mark the script as currently running.
 	var sfQueue = true;
 	
