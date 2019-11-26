@@ -19,7 +19,6 @@ TODO:
 
 	IMPORTANT:
 
-	Proper version control as opposed to random commits being thrown in.
 	Desktop Notification when a new case is added to the queue - work on above code as it will currently still notifiy the user when a case is removed from the queue...
 	Options menu to set interval, idle timeout & notification settings.
 	
