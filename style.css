@@ -15,13 +15,13 @@
 	font-weight: bold;
 }
 
-.toggle on {
+.toggle.on {
 	background: rgb(240, 240, 244); 
 	color: black; 
 	content: "||";
 }
 
-.toggle off {
+.toggle.off {
 	background: #32cc32; 
 	color: white; 
 	content: "►";
