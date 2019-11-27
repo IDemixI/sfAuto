@@ -1,12 +1,5 @@
 Desktop Notification on new case (PoC):
 
-// Grab Original case count.
-var currentCaseCount = document.getElementById("ext-gen12").childElementCount;
-
-if (document.getElementById("ext-gen12").childElementCount > currentCaseCount) {
-	// Case number has changed. Push Desktop Notification
-}
-
 Possibly store cases in an array and check against the array to see changes, as opposed to number of cases. This will eliminate the issue of creating a notification when
 a case is removed from the queue. Maybe still keep the count as part of the notifcation?
 
@@ -14,10 +7,18 @@ a case is removed from the queue. Maybe still keep the count as part of the noti
 "A new case/response has been received - "case number - description"
 "Total Cases in queue: 123"
 
-notifyMe('Case', '00012345', 'FME License Issue', 3)
-
 document.getElementById("globalHeaderNameMink").children[1].textContent - Grab Username
 I can use this if I go down the store user settings to JSON route - Can check the JSON for an entry with this name and write or update depending on what comes back. This means all "settings" including refresh rate can be stored (no need to enter it each time a user loads the page)
+
+Below code grabs the case ref from case page - just need to check url for /5001 (for cases) and then if that's the case, add a nifty little button to fire off said code:
+
+var x = window.location.pathname.substring(1,window.location.pathname.length);
+x = x.slice(0,5) + x.slice(9);
+var refID = 'ref:_' + '00D201JWt' + '._' + x + ':ref';
+copy(refID);
+
+Just need to add a "copied to clipboard" message and we are gold.
+
 
 
 TODO:
