@@ -48,7 +48,22 @@ function insertAfter(referenceNode, newNode) {
 
 // Function to refresh the list and update the last update timestamp.
 function sfUpdate() {
+	
+	// Grab current case count.
+	var currentCaseCount = document.getElementById("ext-gen12").childElementCount;
+	
+	// If record is empty, get rid of the "empty" count.
+	if (document.getElementById("ext-gen12").children[0].innerText == "No records to display.") {
+		currentCaseCount = 0;
+	}
+
+	// Reload the case panel
 	javascript: ListViewport.instances[uID].refreshList();
+	
+	// Send original count and compare new count (Gather other info and fire off message if required)
+	setTimeout(function() { checkCases(currentCaseCount) }, 250);
+	
+	// last update time and other visual elements refresh
 	setTimeout(createUpdateItem, 250);
 }
 
@@ -136,26 +151,64 @@ function toggleStatus(){
 	}
 }
 
+// Case Status Check
+function checkCases(currentCaseCount) {
+	
+	console.log("Original: " + currentCaseCount);
+	
+	// Grab new case count.
+	var newCaseCount = document.getElementById("ext-gen12").childElementCount;
+
+	console.log("New: " + newCaseCount);
+	
+	/*
+	for (i = 0; i < newCaseCount; i++) {
+		console.log(document.getElementById("ext-gen12").children[i].innerText);
+	}
+	*/
+
+	if (currentCaseCount > 0 && document.getElementById("ext-gen12").children[0].innerText !== "No records to display."){
+
+		if (newCaseCount > currentCaseCount) {
+			// Case number has changed. Push Desktop Notification
+			notifyMe('New Case in Queue!');
+		}
+	}
+
+	// global array? can use the console loop above in order to store the info in an array - just don't know how I'm going to compare an original to the new... where can I store original? hence global...
+	//body: 'A New ' + type + ' has been received.' + '\n' + 'Case: ' + caseNum + ' - ' + desc + '\n\n' + 'Total Cases in Queue: ' + totalCases
+	
+}
+
 // Notification function
-function notifyMe(type, caseNum, desc, totalCases) {
+function notifyMe(body, name, icon) {
+	
+	if (name === undefined || typeof name === 'undefined') {
+		var name = 'Salesforce Support Queue Notification';
+	}
+		
+	if (icon === undefined || typeof icon === 'undefined') {
+		var icon = 'https://130e178e8f8ba617604b-8aedd782b7d22cfe0d1146da69a52436.ssl.cf1.rackcdn.com/salesforce-security-alert-api-error-exposed-marketing-data-showcase_image-6-a-11278.jpg';
+	}
+	
     if (!window.Notification) {
         console.log('Browser does not support notifications.');
     } else {
         // check if permission is already granted
         if (Notification.permission === 'granted') {
             // show notification here
-            var notify = new Notification('Salesforce Support Queue Notification', {
-				body: 'A New ' + type + ' has been received.' + '\n' + 'Case: ' + caseNum + ' - ' + desc + '\n\n' + 'Total Cases in Queue: ' + totalCases ,
-                icon: 'https://130e178e8f8ba617604b-8aedd782b7d22cfe0d1146da69a52436.ssl.cf1.rackcdn.com/salesforce-security-alert-api-error-exposed-marketing-data-showcase_image-6-a-11278.jpg',
+            var notify = new Notification(name, {
+				body: body ,
+                icon: icon
             });
         } else {
             // request permission from user
             Notification.requestPermission().then(function (p) {
                 if (p === 'granted') {
                     // show notification here
-                    var notify = new Notification('Salesforce Support Queue Notification', {
-                        body: 'A New ' + type + ' has been received.' + '\n' + 'Case: ' + caseNum + ' - ' + desc + '\n\n' + 'Total Cases in Queue: ' + totalCases ,
-                        icon: 'https://130e178e8f8ba617604b-8aedd782b7d22cfe0d1146da69a52436.ssl.cf1.rackcdn.com/salesforce-security-alert-api-error-exposed-marketing-data-showcase_image-6-a-11278.jpg',
+                    var notify = new Notification(name, {
+                        body: body ,
+                        icon: icon
                     });
                 } else {
                     console.log('User blocked notifications.');
