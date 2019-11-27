@@ -12,13 +12,23 @@ I can use this if I go down the store user settings to JSON route - Can check th
 
 Below code grabs the case ref from case page - just need to check url for /5001 (for cases) and then if that's the case, add a nifty little button to fire off said code:
 
+https://www.w3schools.com/howto/howto_css_modals.asp
+
 var x = window.location.pathname.substring(1,window.location.pathname.length);
 x = x.slice(0,5) + x.slice(9);
 var refID = 'ref:_' + '00D201JWt' + '._' + x + ':ref';
-copy(refID);
+var caseNum = '000000';
+var caseDesc = 'Test';
+//copy(refID);
+alert("Case Reference:\n\n" +  refID + '\n\n' + 'Email Subject:\n\n' + 'Case ' + caseNum + ' - ' + caseDesc + ' - ' + refID );
 
 Just need to add a "copied to clipboard" message and we are gold.
 
+
+var test = document.getElementById("ext-gen12").children[0].innerText;
+var test2 = test.split("	");
+for i bleh bleh
+test2[i].replace(/[-+()\s]/g, '');
 
 
 TODO:
