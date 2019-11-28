@@ -47,7 +47,7 @@ TODO:
 	RESOURCES:
 	
 	http://youmightnotneedjquery.com/
-	
+	https://idemixi.github.io/sfAutoRefresh/
 	
 	
 HTML:
