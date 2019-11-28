@@ -154,17 +154,28 @@ function toggleStatus(){
 // Case Status Check
 function checkCases(currentCaseCount) {
 	
-	console.log("Original: " + currentCaseCount);
+	//console.log("Original: " + currentCaseCount);
 	
 	// Grab new case count.
 	var newCaseCount = document.getElementById("ext-gen12").childElementCount;
 
-	console.log("New: " + newCaseCount);
+	//console.log("New: " + newCaseCount);
 	
 	/*
+	// Build simple array of cases.
+	
+	var newCaseCount = document.getElementById("ext-gen12").childElementCount;
+	var caseArray = [];
+
 	for (i = 0; i < newCaseCount; i++) {
-		console.log(document.getElementById("ext-gen12").children[i].innerText);
+		caseArray[i] = document.getElementById("ext-gen12").children[i].innerText;
+		caseArray[i] = caseArray[i].split("	");
+		
+		for (x = 0; x < caseArray[i].length; i++) {
+			caseArray[i][x] = caseArray[i][x].replace(/[+()\r\n\t\f\v]/g, '');
+		}
 	}
+	
 	*/
 
 	if (currentCaseCount > 0 && document.getElementById("ext-gen12").children[0].innerText !== "No records to display."){
@@ -172,12 +183,12 @@ function checkCases(currentCaseCount) {
 		if (newCaseCount > currentCaseCount) {
 			// Case number has changed. Push Desktop Notification
 			notifyMe('New Case in Queue!');
+			//notifyMe('A New ' + type + ' has been received.' + '\n' + 'Case: ' + caseNum + ' - ' + desc + '\n\n' + 'Total Cases in Queue: ' + totalCases);
 		}
 	}
 
 	// global array? can use the console loop above in order to store the info in an array - just don't know how I'm going to compare an original to the new... where can I store original? hence global...
-	//body: 'A New ' + type + ' has been received.' + '\n' + 'Case: ' + caseNum + ' - ' + desc + '\n\n' + 'Total Cases in Queue: ' + totalCases
-	
+
 }
 
 // Notification function

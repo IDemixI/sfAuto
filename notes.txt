@@ -1,7 +1,7 @@
 Desktop Notification on new case (PoC):
 
 Possibly store cases in an array and check against the array to see changes, as opposed to number of cases. This will eliminate the issue of creating a notification when
-a case is removed from the queue. Maybe still keep the count as part of the notifcation?
+a case is removed from the queue. Maybe still keep the count as part of the notifcation? - i can pass arrays as parameters... remember this! Maybe we can find a way to do a compare?
 
 "Salesforce Support Queue"
 "A new case/response has been received - "case number - description"
@@ -23,12 +23,6 @@ alert("Case Reference:\n\n" +  refID + '\n\n' + 'Email Subject:\n\n' + 'Case ' +
 //copy(refID);
 
 Just need to add a "copied to clipboard" message and we are gold.
-
-
-var test = document.getElementById("ext-gen12").children[0].innerText;
-var test2 = test.split("	");
-for i bleh bleh
-test2[i].replace(/[-+()\s]/g, '');
 
 
 TODO:
