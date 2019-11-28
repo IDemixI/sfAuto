@@ -17,10 +17,10 @@ https://www.w3schools.com/howto/howto_css_modals.asp
 var x = window.location.pathname.substring(1,window.location.pathname.length);
 x = x.slice(0,5) + x.slice(9);
 var refID = 'ref:_' + '00D201JWt' + '._' + x + ':ref';
-var caseNum = '000000';
-var caseDesc = 'Test';
-//copy(refID);
+var caseNum = document.getElementById("cas2_ileinner").innerText;
+var caseDesc = document.getElementById("cas14_ileinner").innerText;
 alert("Case Reference:\n\n" +  refID + '\n\n' + 'Email Subject:\n\n' + 'Case ' + caseNum + ' - ' + caseDesc + ' - ' + refID );
+//copy(refID);
 
 Just need to add a "copied to clipboard" message and we are gold.
 
