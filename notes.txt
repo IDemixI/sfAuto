@@ -14,12 +14,15 @@ Below code grabs the case ref from case page - just need to check url for /5001 
 
 https://www.w3schools.com/howto/howto_css_modals.asp
 
-var x = window.location.pathname.substring(1,window.location.pathname.length);
-x = x.slice(0,5) + x.slice(9);
-var refID = 'ref:_' + '00D201JWt' + '._' + x + ':ref';
-var caseNum = document.getElementById("cas2_ileinner").innerText;
-var caseDesc = document.getElementById("cas14_ileinner").innerText;
-alert("Case Reference:\n\n" +  refID + '\n\n' + 'Email Subject:\n\n' + 'Case ' + caseNum + ' - ' + caseDesc + ' - ' + refID );
+javascript: (function() {
+    var % 20 x = window.location.pathname.substring(1, window.location.pathname.length);
+    x = x.slice(0, 5) + x.slice(9);
+    var % 20 refID = "ref:_" + "00D201JWt" + "._" + x + ":ref";
+    var % 20 caseNum = document.getElementById("cas2_ileinner").innerText;
+    var % 20 caseDesc = document.getElementById("cas14_ileinner").innerText;
+    var % 20 caseContact = document.getElementById("cas10_ileinner").innerText;
+    alert("Case Reference:\n\n" + refID + "\n\n" + "To Address:\n\n" + caseContact + "\n\n" + "Email Subject:\n\n" + "Case " + caseNum + ": " + caseDesc + " - " + refID)
+})()
 //copy(refID);
 
 Just need to add a "copied to clipboard" message and we are gold.
@@ -44,38 +47,3 @@ TODO:
 	https://idemixi.github.io/sfAutoRefresh/
 	
 	
-HTML:
-<div id="div1">ABCDEFG</div>
-
-CSS:
-
-#div1 {
-  background: rgba(0, 0, 255, 0.6);
-  color: white;
-  padding: 5px;
-  border-radius: 18px;
-  width: 100px;
-  text-align: center;
-}
-
-JS:
-
-var el = document.getElementById("div1");
-
-function fadeIn(el, time) {
-  el.style.opacity = 0;
-
-  var last = +new Date();
-  var tick = function() {
-    el.style.opacity = +el.style.opacity + (new Date() - last) / time;
-    last = +new Date();
-
-    if (+el.style.opacity < 1) {
-      (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
-    }
-  };
-
-  tick();
-}
-
-fadeIn(el, 2000);
