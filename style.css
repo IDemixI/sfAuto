@@ -151,11 +151,11 @@
     opacity: 1
 }
 
- /* The Modal (background) */
+/* The Modal (background) */
 .modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  z-index: 99; /* Sit on top */
   left: 0;
   top: 0;
   width: 100%; /* Full width */
@@ -167,19 +167,25 @@
 
 /* Modal Content/Box */
 .modal-content {
-  background-color: #fefefe;
+  background-color: rgba(255,255,255,0.8);
   margin: 15% auto; /* 15% from the top and centered */
   padding: 20px;
   border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
+  width: 40%; /* Could be more or less, depending on screen size */
+  height: 25%; /* Could be more or less, depending on screen size */
+  border-radius: 12px;
+  font-size: 14px;
 }
 
 /* The Close Button */
 .close {
   color: #aaa;
   float: right;
-  font-size: 28px;
+  font-size: 40px;
   font-weight: bold;
+  position: relative;
+  top: -25px;
+  right: -15px;
 }
 
 .close:hover,
@@ -187,4 +193,20 @@
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+.modal-content table { 
+	border-collapse:separate; 
+	border-spacing:0 15px;
+	width: 100%;
+}
+
+.modal-content td {
+  height: 40px;
+  vertical-align: middle;
+}
+
+.modal-content td:first-child {
+    text-align: right;
+	padding-right: 5px;
 }

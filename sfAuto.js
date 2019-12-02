@@ -231,6 +231,81 @@ function notifyMe(body, name, icon) {
     }
 }
 
+function popRefModal(){
+
+	// Get the modal
+	var modal = document.getElementById("refModal");
+
+	// Make modal appear
+	modal.style.display = "block";
+
+	// Get the <span> element that closes the modal
+	var span = document.getElementsByClassName("close")[0];
+
+	// When the user clicks on <span> (x), close the modal
+	span.onclick = function() {
+	  modal.style.display = "none";
+	}
+
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+	  if (event.target == modal) {
+		modal.style.display = "none";
+	  }
+	}
+	
+}
+
+function copyRef(copyID){
+	// really we want to pass the actual variable to be copied? think about how to do this... and then call the notification function to tell the user that it has been copied to clipboard.
+	console.log("copy " + copyID);
+}
+
+function createRefModal() {
+	
+	var copyImg = '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAABEUlEQVQ4jbXTPy5EURQG8N+MxzBEwUhEJCISNDqxCd00SpUtWIPCAuxBoRiVkEl0OkugkCASMYXBMKN458ULMy/T+JIv9/y5+c65955bkmID62Hv4tUP5nGMe7Rxho8sOYIER7jEGzaxhwZOMRa8wQq2cJUJJJF8wHnEetjPddDCYVS9Qz2Xk/iLi+BQ6CeQYRWTsYrq42HvoINGkUBbepxm+O9YDruJNfTKQ3T5GHwJkSwGigSmMVOQX0J5mA4KUXQHLbmB6YNbdP+1gwnpMw7CHEpFHVQxVZCvoZxI538BBwM2bufsRZyE/YRuKZzRPtVmI14LvyX9pZ/So1Vwnd1BB8+/BCrBbHja0lepBr/gG5RGNXSpyDUHAAAAAElFTkSuQmCC">';
+    var refPart = window.location.pathname.substring(1, window.location.pathname.length);
+    refPart = refPart.slice(0, 5) + refPart.slice(9);
+    var refID = "ref:_" + "00D201JWt" + "._" + refPart + ":ref";
+    var caseNum = document.getElementById("cas2_ileinner").innerText;
+    var caseDesc = document.getElementById("cas14_ileinner").innerText;
+    var caseContact = document.getElementById("cas10_ileinner").innerText;
+	var caseRefContent = "<table><tr><td><strong>Case Reference:</strong></td><td>" + refID + "</td><td>" + "<a href='javascript:void(0)' onclick='copyRef(1)' title='Copy to clipboard'>" + copyImg + "</a>" + "</td></tr>" + "<tr><td><strong>Email Address:</strong></td><td>" + caseContact + "</td><td>" + "<a href='javascript:void(0)' onclick='copyRef(2)' title='Copy to clipboard'>" + copyImg + "</a>" + "</td></tr>" + "<tr><td><strong>Email Subject:</strong></td>" + "<td>Case " + caseNum + ": " + caseDesc + " - " + refID + "</td><td>" + "<a href='javascript:void(0)' onclick='copyRef(3)' title='Copy to clipboard'>" + copyImg + "</a>" + "</td></tr></table>";
+
+	//copy(refID);
+	
+	// Add button to the screen to allow user to bring up the modal with the additional information.
+	var padLeft = document.createTextNode( " " );
+	var caseInfo = document.createElement("input");
+	caseInfo.className = "btn";
+	caseInfo.value = "Case Information";
+	caseInfo.title = "Additional Case Information";
+	caseInfo.type = "button";
+	caseInfo.onclick = ( function() { popRefModal() } );
+	document.getElementById("topButtonRow").appendChild(padLeft);
+	document.getElementById("topButtonRow").appendChild(caseInfo);
+	
+	// Generate Modal HTML & Populate this.
+	var modal = document.createElement("div");
+	modal.id = "refModal";
+	modal.className = "modal";
+	
+	var modalContent = document.createElement("div");
+	modalContent.className = "modal-content";
+	
+	var modalSpan =  document.createElement("span");
+	modalSpan.className = "close";
+	modalSpan.innerHTML = "&times;"
+	
+	modalContent.appendChild(modalSpan);
+	modal.appendChild(modalContent);
+	
+	modalContent.innerHTML += caseRefContent;
+	
+	document.getElementById("bodyCell").appendChild(modal);
+	
+}
+
 // Checks to make sure the script isn't already running in this tab, before allowing you to run again.
 if (typeof sfQueue === 'undefined' || sfQueue === null) {
 	
@@ -240,32 +315,56 @@ if (typeof sfQueue === 'undefined' || sfQueue === null) {
 	// Mark the script as currently running.
 	var sfQueue = true;
 	
-	// Grab the uID of the current view from the URL string.
-	var uID = window.location.search.split('=')[1];
+	// Check which mode the script needs to run in.
+	var mode = window.location.pathname;
 	
-	// Remove any parameters picked up after the uID (Can occur with pagination, etc).
-	if (uID.indexOf("&") != -1) { 
-		uID = uID.slice(0,uID.indexOf("&"));
-	};
+	if(mode.indexOf("5001") > -1 && mode.indexOf("5001") <= 1 ){
+		console.log("Case Mode");
+		mode = "case";
+	} else if (mode.indexOf("500") > -1 && mode.indexOf("500") <= 1) {
+		console.log("Queue Mode");
+		mode = "queue";
+	} else {
+		mode = "N/A";
+	}
 	
-	// Prompt the user to enter a refresh value (seconds).
-	var refresh = prompt("Enter refresh interval (Seconds)", 30);
-	
-	// Set refresh from seconds to milliseconds (* 1000)
-	refresh = refresh * 1000;
-	
-	// Build the elements on the page (Stop/Start button & last updated text).
-	createUpdateItem();
-	
-	// Activate the inactivity timer with a timeout set to 4 hours.
-	inactivityTime(4);
-	
-	// Start the loop to refresh the screen.
-	var timer = true;
-	var loop = setInterval(sfUpdate, refresh);
-	
-	// Initialise notifications
-	setTimeout(setNotification, 500);
+	if (mode == "queue") {
+		
+		// Grab the uID of the current view from the URL string.
+		var uID = window.location.search.split('=')[1];
+		
+		// Remove any parameters picked up after the uID (Can occur with pagination, etc).
+		if (uID.indexOf("&") != -1) { 
+			uID = uID.slice(0,uID.indexOf("&"));
+		};
+		
+		// Prompt the user to enter a refresh value (seconds).
+		var refresh = prompt("Enter refresh interval (Seconds)", 30);
+		
+		// Set refresh from seconds to milliseconds (* 1000)
+		refresh = refresh * 1000;
+		
+		// Build the elements on the page (Stop/Start button & last updated text).
+		createUpdateItem();
+		
+		// Activate the inactivity timer with a timeout set to 4 hours.
+		inactivityTime(4);
+		
+		// Start the loop to refresh the screen.
+		var timer = true;
+		var loop = setInterval(sfUpdate, refresh);
+		
+		// Initialise notifications
+		setTimeout(setNotification, 500);
+		
+	} else if (mode == "case") {
+		
+		// Load the reference modal - This adds the button after "Sharing".
+		setTimeout(createRefModal, 500);
+		
+	} else {
+		console.log("Script Inactive - Navigate to a Case or Queue to use extra script functionality");
+	}
 	
 } else {
 	console.log("Script is already running. Refresh the page to activate script again");
