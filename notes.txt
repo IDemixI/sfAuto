@@ -13,6 +13,7 @@ I can use this if I go down the store user settings to JSON route - Can check th
 Below code grabs the case ref from case page - just need to check url for /5001 (for cases) and then if that's the case, add a nifty little button to fire off said code:
 
 https://www.w3schools.com/howto/howto_css_modals.asp
+https://icons8.com/icon/38591/copy-to-clipboard
 
 javascript: (function() {
     var % 20 x = window.location.pathname.substring(1, window.location.pathname.length);
