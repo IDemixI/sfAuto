@@ -18,7 +18,7 @@ Save the link below as a bookmark in order to activate the automatic refresh fun
 
 Save the link below as a bookmark in order to be able to quickly access the Case Reference & Email Subject. You can click this bookmark when viewing any case.
 
-<a href="javascript:(function(){var%20x=window.location.pathname.substring(1,window.location.pathname.length);x=x.slice(0,5)+x.slice(9);var%20refID='ref:_'+'00D201JWt'+'._'+x+':ref';var%20caseNum=document.getElementById('cas2_ileinner').innerText;var%20caseDesc=document.getElementById('cas14_ileinner').innerText;alert('Case Reference:\n\n'+refID+'\n\n'+'Email Subject:\n\n'+'Case '+caseNum+': '+caseDesc+' - '+refID)})()">Case Reference</a>
+<a href="javascript:(function(){var%20x=window.location.pathname.substring(1,window.location.pathname.length);x=x.slice(0,5)+x.slice(9);var%20refID='ref:_'+'00D201JWt'+'._'+x+':ref';var%20caseNum=document.getElementById('cas2_ileinner').innerText.substring(0,8);var%20caseDesc=document.getElementById('cas14_ileinner').innerText;alert('Case Reference:\n\n'+refID+'\n\n'+'Email Subject:\n\n'+'Case '+caseNum+': '+caseDesc+' - '+refID)})()">Case Reference</a>
 
 <br /><br />
 If you have any additional requirements or suggestions, please let me know!
