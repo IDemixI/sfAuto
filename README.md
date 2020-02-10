@@ -1,10 +1,10 @@
-## sfAutoRefresh
+## sfAuto
 
-Welcome to sfAutoRefresh!
+Welcome to sfAuto!
 
-This is a simple script to automatically refresh Case View within Salesforce.
+This is a small script which started as a very simple automatic refresh for Case Views within Salesforce.
 
-I'm considering renaming this to sfHelper as it is no longer specific to refreshing the case view.
+I'm considering renaming this to sfHelper as it is no longer specific to refreshing the case view and to automation.
 
 <br /><br />
 <strong>Case View Refresh Functionality bookmarklet:</strong>
