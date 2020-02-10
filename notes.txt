@@ -28,6 +28,11 @@ javascript: (function() {
 
 Just need to add a "copied to clipboard" message and we are gold.
 
+<div id="sfAutoOptions" style="float: right;"><input type="button" id="toggleRefresh" src="s.gif" href="javascript:void(0)" class="btn toggle on" style="" value="⚙" title="sfAuto Options" onclick="javascript:alert('options menu')"></div>
+
+The above needs to go under the current refresh button. I should be able to simply duplicate that element, remove the onClick, change || to ⚙, set the title to sfAuto Options and finally float right.
+
+
 
 TODO:
 
@@ -38,9 +43,10 @@ TODO:
 	
 	OTHER:
 	
-	Open new cases in a new tab (option to set alias and only do this for your alias? Or only status new? or both!?)
-	Ability to "highlight" cases of specific type like previous todo. Choose colour, etc?
-	Move settings stuff to external JSON - PoC
+	- Options menu to allow user to change interval, change "log-out" time, etc.
+	- Open new cases in a new tab (option to set alias and only do this for your alias? Or only status new? or both!?)
+	- Ability to "highlight" cases of specific type like previous todo. Choose colour, etc?
+	- Move settings stuff to external JSON - PoC
 	
 	RESOURCES:
 	
