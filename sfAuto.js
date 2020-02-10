@@ -264,12 +264,12 @@ function copyRef(copyID){
 function createRefModal() {
 	
 	var copyImg = '<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABmJLR0QA/wD/AP+gvaeTAAABEUlEQVQ4jbXTPy5EURQG8N+MxzBEwUhEJCISNDqxCd00SpUtWIPCAuxBoRiVkEl0OkugkCASMYXBMKN458ULMy/T+JIv9/y5+c65955bkmID62Hv4tUP5nGMe7Rxho8sOYIER7jEGzaxhwZOMRa8wQq2cJUJJJF8wHnEetjPddDCYVS9Qz2Xk/iLi+BQ6CeQYRWTsYrq42HvoINGkUBbepxm+O9YDruJNfTKQ3T5GHwJkSwGigSmMVOQX0J5mA4KUXQHLbmB6YNbdP+1gwnpMw7CHEpFHVQxVZCvoZxI538BBwM2bufsRZyE/YRuKZzRPtVmI14LvyX9pZ/So1Vwnd1BB8+/BCrBbHja0lepBr/gG5RGNXSpyDUHAAAAAElFTkSuQmCC">';
-    var refPart = window.location.pathname.substring(1, window.location.pathname.length);
-    refPart = refPart.slice(0, 5) + refPart.slice(9);
-    var refID = "ref:_" + "00D201JWt" + "._" + refPart + ":ref";
-    var caseNum = document.getElementById("cas2_ileinner").innerText;
-    var caseDesc = document.getElementById("cas14_ileinner").innerText;
-    var caseContact = document.getElementById("cas10_ileinner").innerText;
+	var refPart = window.location.pathname.substring(1, window.location.pathname.length);
+	refPart = refPart.slice(0, 5) + refPart.slice(9);
+	var refID = "ref:_" + "00D201JWt" + "._" + refPart + ":ref";
+	var caseNum = document.getElementById("cas2_ileinner").innerText.substring(0,8);
+	var caseDesc = document.getElementById("cas14_ileinner").innerText;
+	var caseContact = document.getElementById("cas10_ileinner").innerText;
 	var caseRefContent = "<table><tr><td><strong>Case Reference:</strong></td><td>" + refID + "</td><td>" + "<a href='javascript:void(0)' onclick='copyRef(1)' title='Copy to clipboard'>" + copyImg + "</a>" + "</td></tr>" + "<tr><td><strong>Email Address:</strong></td><td>" + caseContact + "</td><td>" + "<a href='javascript:void(0)' onclick='copyRef(2)' title='Copy to clipboard'>" + copyImg + "</a>" + "</td></tr>" + "<tr><td><strong>Email Subject:</strong></td>" + "<td>Case " + caseNum + ": " + caseDesc + " - " + refID + "</td><td>" + "<a href='javascript:void(0)' onclick='copyRef(3)' title='Copy to clipboard'>" + copyImg + "</a>" + "</td></tr></table>";
 
 	//copy(refID);
