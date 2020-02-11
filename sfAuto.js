@@ -10,9 +10,9 @@ function loadResources(){
 	// Import sfAuto Style Sheet
 	var cssURL = "https://cdn.jsdelivr.net/gh/IDemixI/sfAutoRefresh@master/style.css";
 	var fileref = document.createElement("link");
-    fileref.setAttribute("rel", "stylesheet");
-    fileref.setAttribute("type", "text/css");
-    fileref.setAttribute("href", cssURL);
+    	fileref.setAttribute("rel", "stylesheet");
+    	fileref.setAttribute("type", "text/css");
+    	fileref.setAttribute("href", cssURL);
 	document.getElementsByTagName("head")[0].appendChild(fileref)
 	
 };
@@ -103,13 +103,13 @@ function createUpdateItem() {
 var inactivityTime = function (x) {
     
 	var activeTime;
-    window.onload = resetTimer;
+	window.onload = resetTimer;
 	var setInactiveTimeout = hours(x);
 	
 	
-    // DOM Events
-    document.onmousemove = resetTimer;
-    document.onkeypress = resetTimer;
+    	// DOM Events
+	document.onmousemove = resetTimer;
+	document.onkeypress = resetTimer;
 
 	function hours(ms){
 		var hours = ((ms * 1000) * 60) * 60;
@@ -120,14 +120,14 @@ var inactivityTime = function (x) {
 		window.location.replace("https://eu12.salesforce.com/secur/logout.jsp?product=www.salesforce.com");
 	}
 
-    function resetTimer() {
-        clearTimeout(activeTime);
-        activeTime = setTimeout(logout, setInactiveTimeout)
-    }
+	function resetTimer() {
+		clearTimeout(activeTime);
+		activeTime = setTimeout(logout, setInactiveTimeout)
+	}
 }
 
 // Stop & Start the auto refresh script.
-function toggleStatus(){
+function toggleStatus() {
 	if (timer) {
 		timer = false;
 		clearInterval(loop);
@@ -202,33 +202,33 @@ function notifyMe(body, name, icon) {
 		var icon = 'https://130e178e8f8ba617604b-8aedd782b7d22cfe0d1146da69a52436.ssl.cf1.rackcdn.com/salesforce-security-alert-api-error-exposed-marketing-data-showcase_image-6-a-11278.jpg';
 	}
 	
-    if (!window.Notification) {
-        console.log('Browser does not support notifications.');
-    } else {
-        // check if permission is already granted
-        if (Notification.permission === 'granted') {
-            // show notification here
-            var notify = new Notification(name, {
+	if (!window.Notification) {
+		console.log('Browser does not support notifications.');
+	} else {
+		// check if permission is already granted
+		if (Notification.permission === 'granted') {
+			// show notification here
+			var notify = new Notification(name, {
 				body: body ,
-                icon: icon
-            });
-        } else {
-            // request permission from user
-            Notification.requestPermission().then(function (p) {
-                if (p === 'granted') {
-                    // show notification here
-                    var notify = new Notification(name, {
-                        body: body ,
-                        icon: icon
-                    });
-                } else {
-                    console.log('User blocked notifications.');
-                }
-            }).catch(function (err) {
-                console.error(err);
-            });
-        }
-    }
+				icon: icon
+			});
+		} else {
+			// request permission from user
+			Notification.requestPermission().then(function (p) {
+				if (p === 'granted') {
+					// show notification here
+					var notify = new Notification(name, {
+						body: body ,
+						icon: icon
+					});
+				} else {
+					console.log('User blocked notifications.');
+				}
+			}).catch(function (err) {
+				console.error(err);
+			});
+		}
+	}
 }
 
 function popRefModal(){
@@ -244,19 +244,19 @@ function popRefModal(){
 
 	// When the user clicks on <span> (x), close the modal
 	span.onclick = function() {
-	  modal.style.display = "none";
+		modal.style.display = "none";
 	}
 
 	// When the user clicks anywhere outside of the modal, close it
 	window.onclick = function(event) {
-	  if (event.target == modal) {
-		modal.style.display = "none";
-	  }
+		if (event.target == modal) {
+			modal.style.display = "none";
+		}
 	}
 	
 }
 
-function copyRef(copyID){
+function copyRef(copyID) {
 	// really we want to pass the actual variable to be copied? think about how to do this... and then call the notification function to tell the user that it has been copied to clipboard.
 	console.log("copy " + copyID);
 }
@@ -318,7 +318,7 @@ if (typeof sfQueue === 'undefined' || sfQueue === null) {
 	// Check which mode the script needs to run in.
 	var mode = window.location.pathname;
 	
-	if(mode.indexOf("5001") > -1 && mode.indexOf("5001") <= 1 ){
+	if (mode.indexOf("5001") > -1 && mode.indexOf("5001") <= 1 ){
 		console.log("Case Mode");
 		mode = "case";
 	} else if (mode.indexOf("500") > -1 && mode.indexOf("500") <= 1) {
@@ -363,9 +363,12 @@ if (typeof sfQueue === 'undefined' || sfQueue === null) {
 		setTimeout(createRefModal, 500);
 		
 	} else {
+
 		console.log("Script Inactive - Navigate to a Case or Queue to use extra script functionality");
 	}
 	
-} else {
-	console.log("Script is already running. Refresh the page to activate script again");
-}
+	} else {
+
+		console.log("Script is already running. Refresh the page to activate script again");
+		
+	}
