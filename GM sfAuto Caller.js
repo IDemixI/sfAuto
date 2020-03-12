@@ -12,3 +12,5 @@ function loadsfAuto(){
 };
 
 setTimeout(loadsfAuto, 1000);
+
+console.log("sfAuto Loaded...");
