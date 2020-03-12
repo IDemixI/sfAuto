@@ -1,8 +1,9 @@
 let sfURL = 'https://eu12.salesforce.com/500/e?retURL=%2F500%2Fo&RecordType=012200000000Ovb&ent=Case';
 let mpURL = 'https://tasks.office.com/1spatial.com/en-GB/Home/Planner#/plantaskboard?groupId=aa41d79b-7cbb-4b64-b094-4ea3b6a3091a&planId=l2pbPkT0JkShbOl7FHfvFpYAAFjs'
 
-if(this.document.location.href == sfURL) { // Are we on the Salesforce page? 
-
+//if(this.document.location.href == sfURL) { // Are we on the Salesforce page? 
+if (getUrlParam('FME','Empty') = true) {
+	
 	if (document.readyState === "complete") { // Wait for the page to finish loading
 	
 		// Fill Contact Name
