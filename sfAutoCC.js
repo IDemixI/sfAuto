@@ -151,14 +151,14 @@ if (getUrlParam('FME','Empty') = true) {
 				console.log(licenseInfo.indexOf('Product:') > 1 ? licenseInfo.substring(licenseInfo.indexOf('Product:')) : 'No License Information Available');
 				//alert(cName + "\n" + (licenseInfo.indexOf('Product:') > 1 ? licenseInfo.substring(licenseInfo.indexOf('Product:')) : 'No License Information Available'));
 				let description = licenseInfo.substring(licenseInfo.indexOf('Product:'));
-				this.document.location.href = sfURL + "&FME" + "&Customer=" + encodeURIComponent(cName) + "&Description=" + encodeURIComponent(description);
+				this.document.location.href = sfURL + "&FME=true" + "&Customer=" + encodeURIComponent(cName) + "&Description=" + encodeURIComponent(description);
 			} else {
 				licenseInfo = document.getElementsByClassName("description-hyperlinks isDialogStyle")[0].innerText;
 				console.log(cName);
 				console.log(licenseInfo.indexOf('Product:') > 1 ? licenseInfo.substring(licenseInfo.indexOf('Product:')) : 'No License Information Available');
 				//alert(cName + "\n" + (licenseInfo.indexOf('Product:') > 1 ? licenseInfo.substring(licenseInfo.indexOf('Product:')) : 'No License Information Available'));
 				let description = licenseInfo.substring(licenseInfo.indexOf('Product:'));
-				this.document.location.href = sfURL + "&FME" + "&Customer=" + encodeURIComponent(cName) + "&Description=" + encodeURIComponent(description);
+				this.document.location.href = sfURL + "&FME=true" + "&Customer=" + encodeURIComponent(cName) + "&Description=" + encodeURIComponent(description);
 			}
 		}
 	}
