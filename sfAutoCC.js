@@ -41,6 +41,14 @@ if(this.document.location.href == sfURL) { // Are we on the Salesforce page?
 			input.value = `Generation of FME License for ${customer}\n\n${license}`;
 		}
 
+		function getUrlParam(parameter, defaultvalue){
+			var urlparameter = defaultvalue;
+			if(window.location.href.indexOf(parameter) > -1){
+				urlparameter = getUrlVars()[parameter];
+			}
+			return urlparameter;
+		}
+
 		function autoCase() {
 
 			fillContactName();
@@ -51,13 +59,14 @@ if(this.document.location.href == sfURL) { // Are we on the Salesforce page?
 			fillDescription();
 
 			// Click the button to create the case.
-			document.getElementsByName("save")[0].click();
+			//document.getElementsByName("save")[0].click();
 
 		}
 
-		let customer = "Test test";
-		let license = `Product:  FME Database Edition - Fixed\nLicensed to:  ${customer}\nSerial #:  ABCD-1234-EFGH\nLicence Use:  Production\nQuantity:  3.0`;
-
+		let customer = getUrlParam('Customer','Empty');
+		//let license = `Product:  FME Database Edition - Fixed\nLicensed to:  ${customer}\nSerial #:  ABCD-1234-EFGH\nLicence Use:  Production\nQuantity:  3.0`;
+		let license = getUrlParam('Description', 'Empty');
+		
 		autoCase();
 	
   }
