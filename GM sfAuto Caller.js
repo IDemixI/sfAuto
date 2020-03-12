@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name     sfAuto Loader
+// @name     sfAuto GM Loader
 // @version  1.0
 // @grant    none
 // ==/UserScript==
