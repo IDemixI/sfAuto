@@ -11,4 +11,6 @@ function loadsfAutoCC(){
 	document.getElementsByTagName('head')[0].appendChild(script);
 };
 
-setTimeout(loadsfAutoCC, 1000);
+setTimeout(loadsfAutoCC, 2500);
+
+console.log("sfAutoCC Loaded...");
