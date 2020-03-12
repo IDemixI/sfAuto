@@ -2,6 +2,7 @@
 // @name     sfAuto GM Loader
 // @version  1.0
 // @grant    none
+// @match https://eu12.salesforce.com/500*
 // ==/UserScript==
 
 function loadsfAuto(){
