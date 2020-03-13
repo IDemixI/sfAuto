@@ -1,6 +1,14 @@
 let sfURL = 'https://eu12.salesforce.com/500/e?retURL=%2F500%2Fo&RecordType=012200000000Ovb&ent=Case';
 let mpURL = 'https://tasks.office.com/1spatial.com/en-GB/Home/Planner#/plantaskboard?groupId=aa41d79b-7cbb-4b64-b094-4ea3b6a3091a&planId=l2pbPkT0JkShbOl7FHfvFpYAAFjs'
 
+function getUrlParam(parameter, defaultvalue){
+	var urlparameter = defaultvalue;
+	if(window.location.href.indexOf(parameter) > -1){
+		urlparameter = getUrlVars()[parameter];
+	}
+	return urlparameter;
+}
+
 //if(this.document.location.href == sfURL) { // Are we on the Salesforce page? 
 if (getUrlParam('FME','Empty') = true) {
 	
@@ -40,14 +48,6 @@ if (getUrlParam('FME','Empty') = true) {
 		function fillDescription(){
 			let input = document.getElementById("cas15");
 			input.value = `Generation of FME License for ${customer}\n\n${license}`;
-		}
-
-		function getUrlParam(parameter, defaultvalue){
-			var urlparameter = defaultvalue;
-			if(window.location.href.indexOf(parameter) > -1){
-				urlparameter = getUrlVars()[parameter];
-			}
-			return urlparameter;
 		}
 
 		function autoCase() {
