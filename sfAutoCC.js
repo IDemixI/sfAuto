@@ -2,6 +2,14 @@ let sfURL = 'https://eu12.salesforce.com/500/e?retURL=%2F500%2Fo&RecordType=0122
 let mpURL = 'https://tasks.office.com/1spatial.com/en-GB/Home/Planner#/plantaskboard?groupId=aa41d79b-7cbb-4b64-b094-4ea3b6a3091a&planId=l2pbPkT0JkShbOl7FHfvFpYAAFjs'
 
 function getUrlParam(parameter, defaultvalue){
+    var urlparameter = defaultvalue;
+    if(window.location.href.indexOf(parameter) > -1){
+        urlparameter = getUrlVars()[parameter];
+    }
+    return urlparameter;
+}
+
+function getUrlParam(parameter, defaultvalue){
 	var urlparameter = defaultvalue;
 	if(window.location.href.indexOf(parameter) > -1){
 		urlparameter = getUrlVars()[parameter];
@@ -10,14 +18,14 @@ function getUrlParam(parameter, defaultvalue){
 }
 
 //if(this.document.location.href == sfURL) { // Are we on the Salesforce page? 
-if (getUrlParam('FME','Empty') == true) {
+if (getUrlParam('FME')) {
 	
 	if (document.readyState === "complete") { // Wait for the page to finish loading
 	
 		// Fill Contact Name
 		function fillContactName(){
 			let input = document.getElementById("cas3");
-			input.value = `${customer}`;
+			input.value = `${company}`;
 		}
 
 		// Fill Case Type
@@ -41,13 +49,13 @@ if (getUrlParam('FME','Empty') == true) {
 		// Fill Subject
 		function fillSubject(){
 			let input = document.getElementById("cas14");
-			input.value = `FME License Request - ${customer}`;
+			input.value = `FME License Request - ${company}`;
 		}
 
 		// Fill Description
 		function fillDescription(){
 			let input = document.getElementById("cas15");
-			input.value = `Generation of FME License for ${customer}\n\n${license}`;
+			input.value = `Generation of FME License for ${company}\n\n${description}`;
 		}
 
 		function autoCase() {
@@ -64,9 +72,9 @@ if (getUrlParam('FME','Empty') == true) {
 
 		}
 
-		let customer = getUrlParam('Customer','Empty');
+		let company = getUrlParam('Company','COMPANY');
 		//let license = `Product:  FME Database Edition - Fixed\nLicensed to:  ${customer}\nSerial #:  ABCD-1234-EFGH\nLicence Use:  Production\nQuantity:  3.0`;
-		let license = getUrlParam('Description', 'Empty');
+		let description = getUrlParam('Description', 'LICENSE DETAILS');
 		
 		autoCase();
 	
@@ -151,14 +159,14 @@ if (getUrlParam('FME','Empty') == true) {
 				console.log(licenseInfo.indexOf('Product:') > 1 ? licenseInfo.substring(licenseInfo.indexOf('Product:')) : 'No License Information Available');
 				//alert(cName + "\n" + (licenseInfo.indexOf('Product:') > 1 ? licenseInfo.substring(licenseInfo.indexOf('Product:')) : 'No License Information Available'));
 				let description = licenseInfo.substring(licenseInfo.indexOf('Product:'));
-				this.document.location.href = sfURL + "&FME=true" + "&Customer=" + encodeURIComponent(cName) + "&Description=" + encodeURIComponent(description);
+				this.document.location.href = sfURL + "&FME=1" + "&Company=" + encodeURIComponent(cName) + "&Description=" + encodeURIComponent(description);
 			} else {
 				licenseInfo = document.getElementsByClassName("description-hyperlinks isDialogStyle")[0].innerText;
 				console.log(cName);
 				console.log(licenseInfo.indexOf('Product:') > 1 ? licenseInfo.substring(licenseInfo.indexOf('Product:')) : 'No License Information Available');
 				//alert(cName + "\n" + (licenseInfo.indexOf('Product:') > 1 ? licenseInfo.substring(licenseInfo.indexOf('Product:')) : 'No License Information Available'));
 				let description = licenseInfo.substring(licenseInfo.indexOf('Product:'));
-				this.document.location.href = sfURL + "&FME=true" + "&Customer=" + encodeURIComponent(cName) + "&Description=" + encodeURIComponent(description);
+				this.document.location.href = sfURL + "&FME=1" + "&Company=" + encodeURIComponent(cName) + "&Description=" + encodeURIComponent(description);
 			}
 		}
 	}
