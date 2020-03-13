@@ -130,6 +130,8 @@ if (getUrlParam('FME')) {
 //this.document.location.href = URL;
 //https://www.koskila.net/form-links-planner-tasks/
 //https://tasks.office.com/1spatial.com/en-GB/Home/Planner#/plantaskboard?groupId=aa41d79b-7cbb-4b64-b094-4ea3b6a3091a&planId=l2pbPkT0JkShbOl7FHfvFpYAAFjs - URL to FME Planner
+//http://writeforce.blogspot.com/2012/12/prepopulating-fields-using-url-hacking.html
+
 
 //Logic will be... On planner, click create case button if there is a case to create. It looks to see if License info exists.. if not it will stop.
 //If license info exists it will grab the relevant info (Customer Name & License Details) and redirect to Salesforce UK Case Creation Page
