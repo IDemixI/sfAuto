@@ -1,5 +1,4 @@
 let sfURL = 'https://eu12.salesforce.com/500/e?retURL=%2F500%2Fo&RecordType=012200000000Ovb&ent=Case';
-let mpURL = 'https://tasks.office.com/1spatial.com/en-GB/Home/Planner#/plantaskboard?groupId=aa41d79b-7cbb-4b64-b094-4ea3b6a3091a&planId=l2pbPkT0JkShbOl7FHfvFpYAAFjs'
 
 function getUrlVars() {
     var vars = {};
@@ -17,67 +16,14 @@ function getUrlParam(parameter, defaultvalue){
 	return urlparameter;
 }
 
-//if(this.document.location.href == sfURL) { // Are we on the Salesforce page? 
 if (getUrlParam('FME')) {
 	
 	if (document.readyState === "complete") { // Wait for the page to finish loading
-	
-		// Fill Contact Name
-		function fillContactName(){
-			let input = document.getElementById("cas3");
-			input.value = `${customer}`;
+		// If FME Param = 1 then submit the case instantly.
+		if (getUrlParam('FME') == 1) {
+			document.getElementsByName("save")[0].click();
 		}
-
-		// Fill Case Type
-		function fillCaseType(){
-			let input = document.getElementById("cas5");
-			input.selectedIndex = 5;
-		}
-
-		// Fill Application
-		function fillApplication(){
-			let input = document.getElementById("00N20000000smEB");
-			input.selectedIndex = 27;
-		}
-
-		// Fill Status
-		function fillStatus(){
-			let input = document.getElementById("cas7");
-			input.selectedIndex = 1;
-		}
-
-		// Fill Subject
-		function fillSubject(){
-			let input = document.getElementById("cas14");
-			input.value = `FME License Request - ${company}`;
-		}
-
-		// Fill Description
-		function fillDescription(){
-			let input = document.getElementById("cas15");
-			input.value = `Generation of FME License for ${company}\n\n${description}`;
-		}
-
-		function autoCase() {
-
-			fillContactName();
-			fillCaseType();
-			fillStatus();
-			fillApplication();
-			fillSubject();
-			fillDescription();
-
-			// Click the button to create the case.
-			//document.getElementsByName("save")[0].click();
-
-		}
-
-		let customer = decodeURIComponent(getUrlParam('Customer','CUSTOMER'));
-		let company = decodeURIComponent(getUrlParam('Company','COMPANY'));
-		let description = decodeURIComponent(getUrlParam('Description', 'LICENSE DETAILS'));
-		
-		autoCase();
-	
+	}	
   }
 } else { // If we're on the FME License Planner:
 	
@@ -135,7 +81,7 @@ if (getUrlParam('FME')) {
 				let cName = customerName[i].innerHTML;
 
 				caseButton.innerHTML = "Create Case";
-				caseButton.onclick = function() {setTimeout(function(){getLic(cName)},1000)};
+				caseButton.onclick = function() {setTimeout(function(){genCase(cName)},1000)};
 				caseButton.classList.add("caseButton");
 				caseDiv.appendChild(caseButton);
 
@@ -149,29 +95,30 @@ if (getUrlParam('FME')) {
 
 		}
 
-		function getLic(cName) {
+		function genCase(cName) {
 
 			// Grab License Information from the relevant Task via Planner.
 			let licenseInfo = '';
+			
+			let type = '&' + encodeURIComponent('cas5=Licence Request');
+			let status = '&' + encodeURIComponent('cas7=Acknowledged');
+			let application = '&' + encodeURIComponent('00N20000000smEB=FME');
+			let subject = '&' + encodeURIComponent('cas14=FME License Request - ' + cName);
+						
 			if (document.getElementsByClassName("ms-TextField-field")[3].placeholder != "Add an item") {
 				licenseInfo = document.getElementsByClassName("ms-TextField-field")[3].value;
-				
-				console.log(licenseInfo.indexOf('Product:') > 1 ? licenseInfo.substring(licenseInfo.indexOf('Product:')) : 'No License Information Available');
-				console.log(licenseInfo.substring(licenseInfo.indexOf('mailto:')).substring(7,licenseInfo.substring(licenseInfo.indexOf('mailto:')).indexOf('"')).match(/^([^@]*)@/)[1].replace("."," "));
-				
-				let customer = "TEST";
-				let description = licenseInfo.substring(licenseInfo.indexOf('Product:'));
-				this.document.location.href = sfURL + "&FME=1" + "&Customer=" + encodeURIComponent(customer) + "&Company=" + encodeURIComponent(cName) + "&Description=" + encodeURIComponent(description);
 			} else {
 				licenseInfo = document.getElementsByClassName("description-hyperlinks isDialogStyle")[0].innerText;
-				
-				console.log(licenseInfo.indexOf('Product:') > 1 ? licenseInfo.substring(licenseInfo.indexOf('Product:')) : 'No License Information Available');
-				console.log(licenseInfo.substring(licenseInfo.indexOf('mailto:')).substring(7,licenseInfo.substring(licenseInfo.indexOf('mailto:')).indexOf('"')).match(/^([^@]*)@/)[1].replace("."," "));
-				
-				let customer = "TEST";
-				let description = licenseInfo.substring(licenseInfo.indexOf('Product:'));
-				this.document.location.href = sfURL + "&FME=1" + "&Customer=" + encodeURIComponent(customer) + "&Company=" + encodeURIComponent(cName) + "&Description=" + encodeURIComponent(description);
 			}
+			
+			console.log(licenseInfo.indexOf('Product:') > 1 ? licenseInfo.substring(licenseInfo.indexOf('Product:')) : 'No License Information Available');
+			console.log(licenseInfo.substring(licenseInfo.indexOf('mailto:')).substring(7,licenseInfo.substring(licenseInfo.indexOf('mailto:')).indexOf('"')).match(/^([^@]*)@/)[1].replace("."," "));
+			
+			let customer = '&' + encodeURIComponent('cas3=TEST');
+			let description = '&' + encodeURIComponent(licenseInfo.substring(licenseInfo.indexOf('Product:')));
+
+			this.document.location.href = sfURL + "&FME=0" + customer + type + status + application + subject + description;
+
 		}
 	}
 } 
@@ -194,4 +141,3 @@ if (getUrlParam('FME')) {
 // Grab any email addresses within the license and let user select which one to use (simple modal with dropdown?)
 // Add logic to stop case creation if license info is missing (or contact name for that matter? Give the choice to continue or not for both of these!
 // Tick off the "Create Case" checkbox before leaving Planner so that the create case button does not appear next load.
-// Tidy up getLic function.
