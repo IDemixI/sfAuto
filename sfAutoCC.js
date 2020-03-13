@@ -10,7 +10,7 @@ function getUrlParam(parameter, defaultvalue){
 }
 
 //if(this.document.location.href == sfURL) { // Are we on the Salesforce page? 
-if (getUrlParam('FME','Empty') = true) {
+if (getUrlParam('FME','Empty') == true) {
 	
 	if (document.readyState === "complete") { // Wait for the page to finish loading
 	
