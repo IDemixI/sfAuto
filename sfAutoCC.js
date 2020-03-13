@@ -72,9 +72,9 @@ if (getUrlParam('FME')) {
 
 		}
 
-		let company = getUrlParam('Company','COMPANY');
+		let company = decodeURIComponent(getUrlParam('Company','COMPANY'));
 		//let license = `Product:  FME Database Edition - Fixed\nLicensed to:  ${customer}\nSerial #:  ABCD-1234-EFGH\nLicence Use:  Production\nQuantity:  3.0`;
-		let description = getUrlParam('Description', 'LICENSE DETAILS');
+		let description = decodeURIComponent(getUrlParam('Description', 'LICENSE DETAILS'));
 		
 		autoCase();
 	
