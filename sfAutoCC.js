@@ -25,7 +25,7 @@ if (getUrlParam('FME')) {
 		// Fill Contact Name
 		function fillContactName(){
 			let input = document.getElementById("cas3");
-			input.value = `${company}`;
+			input.value = `${customer}`;
 		}
 
 		// Fill Case Type
@@ -72,8 +72,8 @@ if (getUrlParam('FME')) {
 
 		}
 
+		let customer = decodeURIComponent(getUrlParam('Customer','CUSTOMER'));
 		let company = decodeURIComponent(getUrlParam('Company','COMPANY'));
-		//let license = `Product:  FME Database Edition - Fixed\nLicensed to:  ${customer}\nSerial #:  ABCD-1234-EFGH\nLicence Use:  Production\nQuantity:  3.0`;
 		let description = decodeURIComponent(getUrlParam('Description', 'LICENSE DETAILS'));
 		
 		autoCase();
@@ -155,18 +155,22 @@ if (getUrlParam('FME')) {
 			let licenseInfo = '';
 			if (document.getElementsByClassName("ms-TextField-field")[3].placeholder != "Add an item") {
 				licenseInfo = document.getElementsByClassName("ms-TextField-field")[3].value;
-				console.log(cName);
+				
 				console.log(licenseInfo.indexOf('Product:') > 1 ? licenseInfo.substring(licenseInfo.indexOf('Product:')) : 'No License Information Available');
-				//alert(cName + "\n" + (licenseInfo.indexOf('Product:') > 1 ? licenseInfo.substring(licenseInfo.indexOf('Product:')) : 'No License Information Available'));
+				console.log(licenseInfo.substring(licenseInfo.indexOf('mailto:')).substring(7,licenseInfo.substring(licenseInfo.indexOf('mailto:')).indexOf('"')).match(/^([^@]*)@/)[1].replace("."," "));
+				
+				let customer = "TEST";
 				let description = licenseInfo.substring(licenseInfo.indexOf('Product:'));
-				this.document.location.href = sfURL + "&FME=1" + "&Company=" + encodeURIComponent(cName) + "&Description=" + encodeURIComponent(description);
+				this.document.location.href = sfURL + "&FME=1" + "&Customer=" + encodeURIComponent(customer) + "&Company=" + encodeURIComponent(cName) + "&Description=" + encodeURIComponent(description);
 			} else {
 				licenseInfo = document.getElementsByClassName("description-hyperlinks isDialogStyle")[0].innerText;
-				console.log(cName);
+				
 				console.log(licenseInfo.indexOf('Product:') > 1 ? licenseInfo.substring(licenseInfo.indexOf('Product:')) : 'No License Information Available');
-				//alert(cName + "\n" + (licenseInfo.indexOf('Product:') > 1 ? licenseInfo.substring(licenseInfo.indexOf('Product:')) : 'No License Information Available'));
+				console.log(licenseInfo.substring(licenseInfo.indexOf('mailto:')).substring(7,licenseInfo.substring(licenseInfo.indexOf('mailto:')).indexOf('"')).match(/^([^@]*)@/)[1].replace("."," "));
+				
+				let customer = "TEST";
 				let description = licenseInfo.substring(licenseInfo.indexOf('Product:'));
-				this.document.location.href = sfURL + "&FME=1" + "&Company=" + encodeURIComponent(cName) + "&Description=" + encodeURIComponent(description);
+				this.document.location.href = sfURL + "&FME=1" + "&Customer=" + encodeURIComponent(customer) + "&Company=" + encodeURIComponent(cName) + "&Description=" + encodeURIComponent(description);
 			}
 		}
 	}
@@ -184,3 +188,10 @@ if (getUrlParam('FME')) {
 //If license info exists it will grab the relevant info (Customer Name & License Details) and redirect to Salesforce UK Case Creation Page
 //This info will be pulled into the relevant fields and the case opened. This means GM needs to be running on the new case URL with "&FME" as part of the url, so it only reads from that point!
 //Need to create a new git repo for this and upload the completed scrip there.
+
+//TODO:
+
+// Grab any email addresses within the license and let user select which one to use (simple modal with dropdown?)
+// Add logic to stop case creation if license info is missing (or contact name for that matter? Give the choice to continue or not for both of these!
+// Tick off the "Create Case" checkbox before leaving Planner so that the create case button does not appear next load.
+// Tidy up getLic function.
