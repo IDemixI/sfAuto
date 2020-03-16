@@ -23,8 +23,8 @@ if (getUrlParam('FME')) {
 		if (getUrlParam('FME') == 1) {
 			document.getElementsByName("save")[0].click();
 		}
-	}	
-  }
+	}
+
 } else { // If we're on the FME License Planner:
 	
 	if (document.readyState === "complete") { // Wait for the page to finish loading
