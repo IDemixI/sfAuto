@@ -140,6 +140,7 @@ if (getUrlParam('FME')) {
 
 //TODO:
 
+// REMOVE ENCODING FROM '=' IN THE URL! THIS BREAKS IT!
 // Grab any email addresses within the license and let user select which one to use (simple modal with dropdown?)
 // Add logic to stop case creation if license info is missing (or contact name for that matter? Give the choice to continue or not for both of these!
 // Tick off the "Create Case" checkbox before leaving Planner so that the create case button does not appear next load.
