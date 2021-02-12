@@ -318,10 +318,10 @@ if (typeof sfQueue === 'undefined' || sfQueue === null) {
 	// Check which mode the script needs to run in.
 	var mode = window.location.pathname;
 	
-	if (mode.indexOf("5001") > -1 && mode.indexOf("5001") <= 1 ){
+	if (mode.indexOf("5006") == 1){
 		console.log("Case Mode");
 		mode = "case";
-	} else if (mode.indexOf("500") > -1 && mode.indexOf("500") <= 1) {
+	} else if (mode == "/500") {
 		console.log("Queue Mode");
 		mode = "queue";
 	} else {
@@ -367,8 +367,8 @@ if (typeof sfQueue === 'undefined' || sfQueue === null) {
 		console.log("Script Inactive - Navigate to a Case or Queue to use extra script functionality");
 	}
 	
-	} else {
+} else {
 
-		console.log("Script is already running. Refresh the page to activate script again");
-		
-	}
+	console.log("Script is already running. Refresh the page to activate script again");
+
+}
