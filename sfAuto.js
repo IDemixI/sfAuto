@@ -378,15 +378,16 @@ function checkValidSupport(){
 			} else {
 				console.log("No Assets Available");
 			}
+			if (valid){
+				console.log("Valid Support & Maintenance Contract")
+			} else {
+				console.log("Out of Support & Maintenance")
+				setNotification('Out of Support & Maintenance', 'warning', 5000);
+			}
   		}
 	);
 	
-	if (valid){
-		console.log("Valid Support & Maintenance Contract")
-	} else {
-		console.log("Out of Support & Maintenance")
-		setNotification('Out of Support & Maintenance', 'warning', 10000);
-	}
+
 	
 }
 
