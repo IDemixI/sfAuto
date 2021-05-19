@@ -17,6 +17,8 @@
 .toggle.on {
 	background: rgb(240, 240, 244) !important; 
 	color: black; 
+	font-size: 1.2em;
+	line-height: 0px;
 }
 
 .toggle.off {
