@@ -117,7 +117,7 @@ var inactivityTime = function (x) {
 	}
 
 	function logout() {
-		window.location.replace("https://eu12.salesforce.com/secur/logout.jsp?product=www.salesforce.com");
+		window.location.replace("https://1spatial.my.salesforce.com/secur/logout.jsp?product=www.salesforce.com");
 	}
 
 	function resetTimer() {
@@ -306,6 +306,63 @@ function createRefModal() {
 	
 }
 
+// Makes a POST to grab any assets associated with an account
+async function getAssets(url = '', account = '') {
+  const response = await fetch(url, {
+    method: 'POST',
+    mode: 'cors',
+    cache: 'no-cache',
+    credentials: 'same-origin',
+    headers: {
+		'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+		'Cache-Control': 'no-cache',
+		'Referer': `https://1spatial.my.salesforce.com/${account}`,
+		'Pragma': 'no-cache',
+		'Accept': 'application/json'
+    },
+    redirect: 'follow',
+    referrerPolicy: 'no-referrer',
+    body: new URLSearchParams({
+        'parentId': `${account}`,
+        'rlId': `${account}_RelatedAssetList`,
+        'visualforce': '',
+				'retURL': `/${account}`
+    })
+  });
+  return response.text();
+}
+
+function checkValidSupport(){
+	
+	let today = new Date();
+	let valid = false;
+	let account = document.getElementById("cas4_ileinner").firstChild.id.substr(6,15);
+	
+	getAssets('https://1spatial.my.salesforce.com/_ui/common/list/RelatedListServlet', account)
+  		.then(data => {
+			let lines = data.split('\n');
+			let assetData = JSON.parse(lines[1]);
+
+			let parser = new DOMParser();
+			let doc = parser.parseFromString(assetData["rls"][`${account}_RelatedAssetList`]["content"], 'text/html');
+	
+			let assets = doc.getElementById(`${account}_RelatedAssetList_body`).getElementsByClassName("dataCell DateElement");
+
+			for (i=0; i < assets.length; i++) {
+				let dateString = assets[i].innerHTML.substr(3, 2)+"/"+assets[i].innerHTML.substr(0, 2)+"/"+assets[i].innerHTML.substr(6, 4);
+				let assetDate = new Date(dateString);
+				if (today.getTime() < assetDate.getTime()){valid = true;}
+			};
+
+			if (valid){
+				console.log("Valid Support & Maintenance Contract")
+			} else {
+				console.log("Out of Support & Maintenance")
+			}
+  		}
+	);
+}
+
 // Checks to make sure the script isn't already running in this tab, before allowing you to run again.
 if (typeof sfQueue === 'undefined' || sfQueue === null) {
 	
@@ -361,6 +418,7 @@ if (typeof sfQueue === 'undefined' || sfQueue === null) {
 		
 		// Load the reference modal - This adds the button after "Sharing".
 		setTimeout(createRefModal, 500);
+		setTimeout(checkValidSupport, 1000);
 		
 	} else {
 
