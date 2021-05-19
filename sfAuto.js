@@ -309,25 +309,23 @@ function createRefModal() {
 // Makes a POST to grab specific data associated with an account
 async function getAccountData(account = '', data = '') {
 
-  let rlId = "";
+  let body = new URLSearchParams({'parentId': `${account}`, 'visualforce': '', 'retURL': `/${account}`});
   let url = "https://1spatial.my.salesforce.com/_ui/common/list/RelatedListServlet";
 	
   switch(data) {
     case "assets":
-      rlId = `'rlId': '${account}_RelatedAssetList'`;
+      body.append('rlId', `${account}_RelatedAssetList`);
       break;
     case "contracts":
-      rlId = `'rlId': '${account}_RelatedContractList'`;
+      body.append('rlId', `${account}_RelatedContractList`);
       break;
     case "entitlements":
-      rlId = `'rlId': '${account}_RelatedEntitlementList'`;
+      body.append('rlId', `${account}_RelatedEntitlementList`);
       break;
     case "all":
-      rlId = {
-	      'rlId': `${account}_RelatedAssetList`,
-	      'rlId': `${account}_RelatedContractList`,
-	      'rlId': `${account}_RelatedEntitlementList`
-      }
+      body.append('rlId', `${account}_RelatedAssetList`);
+      body.append('rlId', `${account}_RelatedContractList`);
+      body.append('rlId', `${account}_RelatedEntitlementList`);
       break;
     default:
       console.log("An error has occured. Unknown data type within getAccountData");
@@ -348,12 +346,7 @@ async function getAccountData(account = '', data = '') {
     },
     redirect: 'follow',
     referrerPolicy: 'no-referrer',
-    body: new URLSearchParams({
-        'parentId': `${account}`,
-        rlId,
-        'visualforce': '',
-	'retURL': `/${account}`
-    })
+    body: body
   });
   return response.text();
 }
