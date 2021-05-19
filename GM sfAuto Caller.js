@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name     sfAuto GM Loader
-// @version  1.0
+// @version  1.
 // @grant    none
-// @match https://eu12.salesforce.com/500*
+// @match https://1spatial.my.salesforce.com/500*
 // ==/UserScript==
 
 function loadsfAuto(){
