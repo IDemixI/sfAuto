@@ -306,27 +306,46 @@ function createRefModal() {
 	
 }
 
-// Makes a POST to grab any assets associated with an account
-async function getAssets(url = '', account = '') {
+// Makes a POST to grab specific data associated with an account
+async function getAccountData(account = '', data = '') {
+
+  let mode = "";
+  let url = "https://1spatial.my.salesforce.com/_ui/common/list/RelatedListServlet";
+	
+  switch(data) {
+    case "assets":
+      mode = "RelatedAssetList";
+      break;
+    case "contracts":
+      mode = "RelatedContractList";
+      break;
+    case "entitlements":
+      mode = "RelatedEntitlementList";
+      break;
+    default:
+      console.log("An error has occured. Unknown data type within getAccountData");
+      break;
+  } 
+	
   const response = await fetch(url, {
     method: 'POST',
     mode: 'cors',
     cache: 'no-cache',
     credentials: 'same-origin',
     headers: {
-		'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-		'Cache-Control': 'no-cache',
-		'Referer': `https://1spatial.my.salesforce.com/${account}`,
-		'Pragma': 'no-cache',
-		'Accept': 'application/json'
+	'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+	'Cache-Control': 'no-cache',
+	'Referer': `https://1spatial.my.salesforce.com/${account}`,
+	'Pragma': 'no-cache',
+	'Accept': 'application/json'
     },
     redirect: 'follow',
     referrerPolicy: 'no-referrer',
     body: new URLSearchParams({
         'parentId': `${account}`,
-        'rlId': `${account}_RelatedAssetList`,
+        'rlId': `${account}_${mode}`,
         'visualforce': '',
-				'retURL': `/${account}`
+	'retURL': `/${account}`
     })
   });
   return response.text();
@@ -338,7 +357,9 @@ function checkValidSupport(){
 	let valid = false;
 	let account = document.getElementById("cas4_ileinner").firstChild.id.substr(6,15);
 	
-	getAssets('https://1spatial.my.salesforce.com/_ui/common/list/RelatedListServlet', account)
+	
+	// Check Asset Details
+	getAccountData(account, 'assets')
   		.then(data => {
 			let lines = data.split('\n');
 			let assetData = JSON.parse(lines[1]);
@@ -347,21 +368,26 @@ function checkValidSupport(){
 			let doc = parser.parseFromString(assetData["rls"][`${account}_RelatedAssetList`]["content"], 'text/html');
 	
 			let assets = doc.getElementById(`${account}_RelatedAssetList_body`).getElementsByClassName("dataCell DateElement");
-
-			for (i=0; i < assets.length; i++) {
-				let dateString = assets[i].innerHTML.substr(3, 2)+"/"+assets[i].innerHTML.substr(0, 2)+"/"+assets[i].innerHTML.substr(6, 4);
-				let assetDate = new Date(dateString);
-				if (today.getTime() < assetDate.getTime()){valid = true;}
-			};
-
-			if (valid){
-				console.log("Valid Support & Maintenance Contract")
+			
+			if (assets.length > 0) {
+				for (i=0; i < assets.length; i++) {
+					let dateString = assets[i].innerHTML.substr(3, 2)+"/"+assets[i].innerHTML.substr(0, 2)+"/"+assets[i].innerHTML.substr(6, 4);
+					let assetDate = new Date(dateString);
+					if (today.getTime() < assetDate.getTime()){valid = true;}
+				};
 			} else {
-				console.log("Out of Support & Maintenance")
-				setNotification('Out of Support & Maintenance', 'warning', 10000);
+				console.log("No Assets Available");
 			}
   		}
 	);
+	
+	if (valid){
+		console.log("Valid Support & Maintenance Contract")
+	} else {
+		console.log("Out of Support & Maintenance")
+		setNotification('Out of Support & Maintenance', 'warning', 10000);
+	}
+	
 }
 
 // Checks to make sure the script isn't already running in this tab, before allowing you to run again.
