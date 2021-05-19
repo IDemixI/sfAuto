@@ -2,7 +2,7 @@
 // @name     sfAutoCC GM Loader
 // @version  1.0
 // @grant    none
-// @match https://eu12.salesforce.com/500/e?retURL=%2F500%2Fo&RecordType=012200000000Ovb&ent=Case&FME*
+// @match https://1spatial.my.salesforce.com/500/e?retURL=%2F500%2Fo&RecordType=012200000000Ovb&ent=Case&FME*
 // @match https://tasks.office.com/*
 // ==/UserScript==
 
