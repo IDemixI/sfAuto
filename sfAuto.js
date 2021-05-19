@@ -309,18 +309,23 @@ function createRefModal() {
 // Makes a POST to grab specific data associated with an account
 async function getAccountData(account = '', data = '') {
 
-  let mode = "";
+  let rlId = "";
   let url = "https://1spatial.my.salesforce.com/_ui/common/list/RelatedListServlet";
 	
   switch(data) {
     case "assets":
-      mode = "RelatedAssetList";
+      rlId = `'rlId': '${account}_RelatedAssetList'`;
       break;
     case "contracts":
-      mode = "RelatedContractList";
+      rlId = `'rlId': '${account}_RelatedContractList'`;
       break;
     case "entitlements":
-      mode = "RelatedEntitlementList";
+      rlId = `'rlId': '${account}_RelatedEntitlementList'`;
+      break;
+    case "all":
+      rlId = `'rlId': '${account}_RelatedAssetList',
+      'rlId': '${account}_RelatedContractList',
+      'rlId': '${account}_RelatedEntitlementList'`;
       break;
     default:
       console.log("An error has occured. Unknown data type within getAccountData");
@@ -343,7 +348,7 @@ async function getAccountData(account = '', data = '') {
     referrerPolicy: 'no-referrer',
     body: new URLSearchParams({
         'parentId': `${account}`,
-        'rlId': `${account}_${mode}`,
+        rlId,
         'visualforce': '',
 	'retURL': `/${account}`
     })
@@ -359,7 +364,7 @@ function checkValidSupport(){
 	
 	
 	// Check Asset Details
-	getAccountData(account, 'assets')
+	getAccountData(account, 'all')
   		.then(data => {
 			let lines = data.split('\n');
 			let assetData = JSON.parse(lines[1]);
@@ -367,7 +372,7 @@ function checkValidSupport(){
 			let parser = new DOMParser();
 			let doc = parser.parseFromString(assetData["rls"][`${account}_RelatedAssetList`]["content"], 'text/html');
 	
-			let assets = doc.getElementById(`${account}_RelatedAssetList_body`).getElementsByClassName("dataCell DateElement");
+			let assets = doc.getElementById(`${account}_RelatedAssetList_body`).querySelectorAll(".dataCell.DateElement:last-child");
 			
 			if (assets.length > 0) {
 				for (i=0; i < assets.length; i++) {
