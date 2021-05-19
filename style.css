@@ -22,7 +22,7 @@
 }
 
 .toggle.off {
-	background: #32cc32 !important; 
+	background: radial-gradient(circle, rgb(181, 165, 81) 0%, rgb(211, 202, 150) 80%) !important; 
 	color: white; 
 }
 
