@@ -17,7 +17,7 @@ function loadResources(){
 	
 };
 
-function setNotification(message) {
+function setNotification(message, theme = 'info') {
 	
 	const myNotification = window.createNotification({
 		closeOnClick: true, // close on click
@@ -25,7 +25,7 @@ function setNotification(message) {
 		positionClass: 'nfc-top-right', // nfc-top-left | nfc-top-right | nfc-bottom-left | nfc-bottom-right
 		onclick: false, // callback
 		showDuration: 2500, // timeout in milliseconds
-		theme: 'info' // success, info, warning, error, and none
+		theme: theme // success, info, warning, error, and none
 	});
 	
 	if (message !== undefined || typeof message !== 'undefined') {
@@ -146,7 +146,7 @@ function toggleStatus() {
 		toggleRefresh = document.getElementById("toggleRefresh");
 		toggleRefresh.classList.remove("off");
 		toggleRefresh.classList.add("on");
-		toggleRefresh.value = "||";
+		toggleRefresh.value = "⏸";
 		toggleRefresh.title = "Auto Refresh: On";
 	}
 }
@@ -358,6 +358,7 @@ function checkValidSupport(){
 				console.log("Valid Support & Maintenance Contract")
 			} else {
 				console.log("Out of Support & Maintenance")
+				setNotification('Out of Support & Maintenance', 'warning');
 			}
   		}
 	);
