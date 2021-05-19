@@ -323,9 +323,11 @@ async function getAccountData(account = '', data = '') {
       rlId = `'rlId': '${account}_RelatedEntitlementList'`;
       break;
     case "all":
-      rlId = `'rlId': '${account}_RelatedAssetList',
-      'rlId': '${account}_RelatedContractList',
-      'rlId': '${account}_RelatedEntitlementList'`;
+      rlId = {
+	      'rlId': `${account}_RelatedAssetList`,
+	      'rlId': `${account}_RelatedContractList`,
+	      'rlId': `${account}_RelatedEntitlementList`
+      }
       break;
     default:
       console.log("An error has occured. Unknown data type within getAccountData");
