@@ -17,14 +17,14 @@ function loadResources(){
 	
 };
 
-function setNotification(message, theme = 'info') {
+function setNotification(message, theme = 'info', duration = 2500) {
 	
 	const myNotification = window.createNotification({
 		closeOnClick: true, // close on click
 		displayCloseButton: false, // displays close button
 		positionClass: 'nfc-top-right', // nfc-top-left | nfc-top-right | nfc-bottom-left | nfc-bottom-right
 		onclick: false, // callback
-		showDuration: 2500, // timeout in milliseconds
+		showDuration: duration, // timeout in milliseconds
 		theme: theme // success, info, warning, error, and none
 	});
 	
@@ -358,7 +358,7 @@ function checkValidSupport(){
 				console.log("Valid Support & Maintenance Contract")
 			} else {
 				console.log("Out of Support & Maintenance")
-				setNotification('Out of Support & Maintenance', 'warning');
+				setNotification('Out of Support & Maintenance', 'warning', 10000);
 			}
   		}
 	);
