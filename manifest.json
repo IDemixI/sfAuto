@@ -1,0 +1,20 @@
+{
+
+  "manifest_version": 1,
+  "name": "sfAuto",
+  "version": "1.0",
+
+  "description": "Adds various helper features to the 1Spatial SalesForce instance.",
+
+  "icons": {
+    "48": "icons/1Spatial-48.png"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["*://*.my.salesforce.com/500*"],
+      "js": ["sfAuto.js"]
+    }
+  ]
+
+}
