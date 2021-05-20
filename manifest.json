@@ -4,12 +4,22 @@
   "name": "sfAuto",
   "version": "1.0",
 
-  "description": "Adds various helper features to the 1Spatial SalesForce instance.",
-
+  "description": "Adds various helper features to SalesForce. Built originally for 1Spatial.",
+  "homepage_url": "https://github.com/IDemixI/sfAuto",
   "icons": {
-    "48": "icons/1Spatial-48.png"
+    "48": "icons/sfAuto-48.png"
   },
-
+  
+  "permissions": [
+    "activeTab"
+  ],
+  
+  "browser_action": {
+    "default_icon": "icons/sfAuto-32.png",
+    "default_title": "sfAuto",
+    "default_popup": "popup/menu.html"
+  },
+  
   "content_scripts": [
     {
       "matches": ["*://*.my.salesforce.com/500*"],
