@@ -2,9 +2,10 @@
 
 Welcome to sfAuto!
 
-This is a small script which started as a very simple automatic refresh for Case Views within Salesforce.
+This is a Firefox Add-on which started as a very simple script to automatically refresh Case Views within Salesforce.
+The purpose of sfAuto is to make case management more intuitive within Salesforce and add some additional functionality to make life easier.
 
-I'm considering renaming this to sfHelper as it is no longer specific to refreshing the case view and to automation.
+Before sfAuto became an Add-on, it was just a script file which could be injected either directly via a Bookmarklet or using something like Greasemonkey. To that end, the original bookmarklet code has been left in below in case you wish to use it in this manner instead.
 
 <br /><br />
 <strong>Case View Refresh Functionality bookmarklet:</strong>
