@@ -52,5 +52,7 @@ TODO:
 	
 	http://youmightnotneedjquery.com/
 	https://idemixi.github.io/sfAutoRefresh/
-	
-	
+	https://design.firefox.com/icons/
+	https://github.com/mdn/webextensions-examples/tree/master/content-script-register
+	https://hackernoon.com/copying-text-to-clipboard-with-javascript-df4d4988697f
+	https://www.w3schools.com/howto/howto_js_copy_clipboard.asp
