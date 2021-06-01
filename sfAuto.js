@@ -84,7 +84,7 @@ function createUpdateItem() {
 		node.id = "lastUpdate";
 		arButton.id = "toggleRefresh";
 		arButton.className = "btn toggle on";
-		arButton.value = "||";
+		arButton.value = "⏸";
 		arButton.title = "Auto Refresh: On";
 		arButton.onclick = ( function() { toggleStatus() });
 		
